@@ -1,162 +1,124 @@
-###Instructions###
+# Project 2 Proposal
+### *MIPS Hazard Visualizer*
 
-*This is a guide document to help you write the project proposal.*
+* **Person**[  ] Composition = *new* **Person**[4];
+ * Composition[0] = "Joshua Fan";
+ * Composition[1] = "Swati Gupta";
+ * Composition[2] = "Xiaoxiang Cao";
+ * Composition[3] = "Nitzan Orr";
 
-*You have to remove this "Instructions" section and replace any text between brackets `[` and `]`.*
+#### Date:
+**May 19th, 2016**
 
-*NOTE: For readability, individual items in a list are not surrounded by brackets (with the exception of the section titled  "Deliverables and Milestones"). Assume these need also be replaced
-Also, any other text is written as an example.*
+### Table of Contents
+* 1.0 [Project Overview](#1.0)
+  * 1.1 [Abstract](#1.1)
+  * 1.2 [Target Customer](#1.2)
+  * 1.3 [Search Words](#1.3)
+  * 1.4 [Scope and Objectives](#1.4)
+* 2.0 [Team and Constraints](#2.0)
+  * 2.1 [Team Profile](#2.1)
+  * 2.2 [Challenges](#2.2)
+  * 2.3 [Assumptions and Constraints](#2.3)
+* 3.0 [Deliverables and Milestones](#3.0)
+  * 3.1 [Project Deliverables](#3.1)
+  * 3.2 [Schedule and Budget Summary](#3.2)
 
-*Post questions in the* ***public discussion forum*** *for the current project.*
+## 1.0 Project Overview
 
-*Note: As long as your proposal contains the key parts and descriptions you may format this document as you see fit. However, I highly recommend certain sections such as* "Objectives and Deliverables" *be described via a bulleted list.*
+#### 1.1 Abstract
+***MIPS Hazard Visualizer*** is an application that helps CS 10 students to visualize where data hazards are mitigated in a pipelined MIPS architecture. Students can enter MIPS assembly instructions and see a visual representation of where forwarding (bypassing) and bubbles (stalls) will occur when the code is executed on a processor that supports pipelining. 
+This program will help students to understand the pipelined processor architecture and the complexities it entails by enabling them to step through their program, one instruction at a time and see where forwarding and bubbles happen. They will be able to apply their understanding in their CS 10 course and future endeavors.
 
----
+#### 1.2 Target Customer
+The clients of this product students who are learning about computer architecture. Specifically, students at Foothill who are taking CS 10 will find this program particularly helpful. Educators will also find this to be a useful instructional tool in the classroom.
 
-###Project 2 Proposal###
+* ***Users:***
+ * Computer Science Students
+ * Computer Science Teachers
 
-####[Project Name]####
+#### 1.3 Search Words
+*Pipeline, hazard, visualizer, CS 10, computer architecture, computer science, bubble, stall, forwarding, bypassing, CPU, MIPS, data hazard, processor, simulator, educational*
 
-__Team Composition:__<br>
-[Name of Teammates]
+#### 1.4 Scope and Objectives
 
-[Date]
+The objective is to build a working system that aids in teaching of computer architecture, especially for teaching subtle differences between processor architectures.  
+that is flexible and responsive to change. Via this group project, the focus is on learning how to divide a big project into smaller doable parts, how to work in team and how to use each team member's strong suit.
 
----
+While following the agile process of software development, team has decided to take the simplest path and building a software system that can be used for entertainment and education. We may use existing codes, libraries and build on them.
 
-####Table of Contents####
+##### *Features:*
+* Desktop program built in Java
+* Visually represented pipeline stages
+* Visually represented data hazards and their mitigations: forwarding and bubbles
+* Step-by-step walkthrough of MIPS assembly instructions. 
 
-[*This page enables the reader to quickly find relevant parts of the document. Including titles and page numbers of each section.
-Note: The page numbers are for example only. Change these as you see fit.*]
+##### *Design and Implementation:*
+Users will be prompted to choose an .asm MIPS assembly file. Then, the instructions will be visually represented by a pipeline diagram. On the diagram, arrows and clouds will be shown to denote forwarding and bubbles, respectively. Users will be able to step through the instructions, observing data hazard mitigation appearing in the pipeline.
 
-* 1 Project Overview 
-  * 1.1 Abstract…………………………………….………………………Pg 3
-  * 1.2 Target Customer……………….…………………………………Pg 4
-  * 1.3 Search Words……………….……………………………………Pg 4
-  * 1.4 Scope and Objectives….…………………………………………Pg 4, 5
-* 2 Team and Constraints
-  * 2.1 Team Profile…….……………………………………………….…Pg 6
-  * 2.2 Challenges……….……………………………………………….Pg 7
-  * 2.3 Assumptions and Constraints………………………………....Pg 7
-* 3 Deliverables and Milestones
- * 3.1 Project Deliverables……………………………………………..Pg 8
- * 3.2 Schedule and Budget Summary…..…………………………..Pg 9
+###### *UML Diagram*
+![UML Diagram](resources/UML Diagram.png)
 
+## 2.0 Team and Constraints
 
----
+#### 2.1 Team Profile
+***Josh***
+ * Algorithms
 
-## 1.0	Project Overview
-### 1.1 Abstract
+***Swati***
+ * Java Swing UI
+ * CS 1A, 1B
+ * Familiarity of database management systems
 
-[How would you briefly describe the purpose of your project?]
+***Xiaoxiang***
+ * CS 10
+ * Proficiency in Git basics and rudimentary knowledge of advanced Git
+ * Basic Markdown editing skills
 
-[Often readers lack sufficient time to read the entire project proposal. Therefore, a short synopsis is necessary to provide motivation and a high level introduction of the project. ]
+***Nitzan***
+ * Long experience with Java
+ * Familiarity with Java API
+ * CS 1A, 1B
 
-* [Give a brief introduction as to ***problem statement***, the ***scope*** and a high level description of the system to be ***delivered***.] 
-*	[Include ***background*** for the project. Motivate the project by describing:
-  * What is the value of the system over the status quo?
-  * How will the final product be used by the target customer?]
+#### 2.2 Challenges
 
+#### 2.3 Assumptions and Constraints
 
-### 1.2.	Target Customer [important part]
+* ***Non-technical Constraints***
+ * Time
+    * Each team member is taking other courses too
+    * Less than 4 weeks to code.
+ * Not all team members have a laptop
+* ***Technical Constraints***
+ * Implementation of advanced UI features will take time because of need to learn about them prior to coding.
+ * Scalable design that will allow addition of possible features and continued maintainability
 
-[Who is the target audience?]
+## 3.0 Deliverables and Milestones
 
-[List the intended user group(s):
-*	Who is  client (direct customer)? 
-*	Who is user (indrect customer)?]
+#### 3.1 Project Deliverables
 
-For example, for a patient management software the client may be the dental office and users may be Office Manager, Patient Coordinator, and Receptionist.
+* Project Proposal
+* UML diagram
+* Source Code
+* Screen Shots
+* Presentation about final product
 
+#### 3.2 Schedule and Budget Summary
 
-### 1.3.	Search Words 
-[Brief descriptors of your project that you think someone might use to search for your project. The descriptor may be three to five words or short phrases.]
-
-
-###1.4.	Scope and Objectives [critical section]
-[What is the scope and goals of your group project?]
-
-[The scope describes the specific software system that your team will be designing and delivering.]
-
-[Reminder:
-
-*	The ideal project will be a software system that will challenge a team of 4 or 5 students to use a broad range of software engineering skills. This includes skills, such as, requirements analysis, software design and architecture,  implementation, testing, to project planning, scheduling, tracking and documentaiton.
-
-*	Each student will each work approximately 10 hours per week for 4 weeks<sup>[1](#footnote_1)</sup>.  As part of the team experience, you will be analyzing what the client would be asking from the developers, list the services and features  to be provided by the proposed system, estimate the efforts for each service or feature, identify the components that have priority and negotiate project services based on time (and budget constraints).<br>
- *<sup><a name="footnote_1">1</a></sup>Note: Rarely does a proposal come in over the top. Instead, more often a proposal is not sufficient in scope and hence not accepted (until modified).*
-
-*	 For every component, state whether you will be working on the implementation<sup>[2](#footnote_2)</sup> that  will support it, or whether you will use existing work. <br>
- *<sup><a name="footnote_2">2</a></sup>Note: The impelementation involves source code.*]
-
-
----
-
-## 2.0	Team and Constraints
-
-###2.1.	Team profile
-[What are the strengths for each team member?]
-
-[For each member of the team ***describe qualifications and strengths***<sup>[3](#footnote_3)</sup>.
-
-*<sup><a name="footnote_3">3</a></sup>Note: Every team member is expected to be involved in all project activities. This section only describes individual strengths, and NOT the team member’s sole responsibilites.*]
-
-
-### 2.1.	Challenges
-[What are the challenges you foresee in successfully completing your project?]
-
-[Provide a ***description of challenges*** that your group might face. These are often technical and non-technical aspects that may not be apparent to the reader.]
-
-For example, if you were creating a software system for a dental office to manage patients, a challenge may be learning the domain, which involves following HIPPA regulations in disclosure of protected health information.
-
-### 2.2.	Assumptions and Constraints
-[Under what assumptions and constraints will the team adhere to?]
-
-[**List any specific assumptions on which the project is based on and imposed constraints** that your team will be working under. Non-technical constraints could be: such as schedule and budget. Technical constraints may be design or implementation metholodogies, tools, operating system(s), hardware or software constraints.
-
-* Non-Technical Constraints:
-  * Such as time limit
-  * add here...
-* Techinical Constraints:
-  * add here...]
-
----
-
-##3.0	Deliverables and Milestones
-
-### 3.1.	Project Deliverables 
-
-[What are the specific delivarables by your team?]
-
-[***Provide a list of deliverables***<sup>[4](#footnote_4)</sup> of any project artifacts.]
-
-Deliverables include:
-*	Software System Project Proposal.
-*	[design document]
-*	[user manual and installation instructions]
-*	[presentations]
-*	[any other documents]
-*	[implementation code]
-*	[This list may include product deployment activities that are necessary for the successful use of the system your team develops.]
-
- *<sup><a name="footnote_4">4</a></sup>Note: This list may be modified over the weeks until the final submission.* 
-
-
-
-### 3.2.	Schedule and Budget Summary [critical section]
-[What are the projected milestones and specific delivarables?]
-
-[Fill in your teams projected milestones. You will be modifying this over the next few weeks.]
-
-
-####Milestones
-
-| Item                       | Date            |
-| :--------------------------|:----------------|
-| Project Proposal           | April 13, 2016  |
-| Proposal Presentation      | April 14, 2016  |
-| [feature 1]                | [expected date] |
-| [feature 2]                | [expected date] |
-| ...                        | [expected date] |
-| Sprint 1                   | April 21, 2016  |
-| ...                        | [expected date] |
-| Demonstration and Delivery | May 12, 2016    |
+| Item                       	| Date                  |
+| :---------------------------|:----------------------|
+| Proposal Presentation	      | Thurs, May 19, 2016   |
+| Project Proposal		          | Sat, May 21, 2016     |
+| File reader			             	| Tue, May 24, 2016     |
+| Instruction storage		      	| Thurs, May 26, 2016   |
+| Sprint 1		                		| Mon, May 30, 2016     |
+| Pipeline graphics			        | Thurs, June 2, 2016   |
+| Assembly interpreter		     	| Thurs, May 26, 2016   |
+| Hazard detection			         | Thurs, June 10, 2016  |
+| Hazard mitigation display	 	| Mon, June 13, 2016    |
+| Sprint 2 		               		| Thurs, June 2, 2016   |
+| Functional prototype		     	| Sat, April 30, 2016   |
+| Scrolling animation		      	| Sun, April 31, 2016   |
+| Sprint 3				                | Thurs, June 9, 2016   |
+| GUI polish		              		| Mon, May 9, 2016      |
+| Demonstration and Delivery		| Thurs, June 16, 2016  |
