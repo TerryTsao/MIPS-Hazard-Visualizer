@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.*;
+import java.util.regex.*;
+
 
 
 
@@ -39,13 +41,51 @@ public class FileReader
 
    private static void readFile() {
       Path file = asmFilePath;
+      String cmd = new String();
+      String registers = new String();
+      String reg1 = new String();
+      String reg2 = new String();
+      String reg3 = new String();
+
       try (InputStream in = Files.newInputStream(file);
             BufferedReader reader =
                   new BufferedReader(new InputStreamReader(in))) {
-         String line = null;
-         while ((line = reader.readLine()) != null) {
-            System.out.println(line);
+         String line = new String();
+
+         //break line info command and registers
+         while ((line = reader.readLine()) != null) {   
+            if(!line.trim().isEmpty()){
+               StringBuilder sbLine = new StringBuilder(line);
+               
+               //remove white space and commas
+               int setAtIndex = 0;
+               for(int charIndex = 0; charIndex < sbLine.length(); charIndex++){
+                  if(!Character.isWhitespace(sbLine.charAt(charIndex)) || sbLine.charAt(charIndex) != ','){
+                     sbLine.setCharAt(setAtIndex++, sbLine.charAt(charIndex));
+                  }
+               }
+               sbLine.delete(setAtIndex, line.length());
+               
+               line = sbLine.toString();
+
+//               if(line.charAt(0) != ' ' && line.charAt(0) != '#')
+//               {
+//                  cmd.append(line.substring(0, 4));
+//
+//                  //find all registers
+//                  for(int i = 4; i < line.length(); ) {
+//                     if(line.charAt(i) == '$') {
+//                        registers.append(line.substring(i+1, i+3));
+//                        i += 4;
+//                     }
+//                  }
+//               } 
+               
+               
+               
+            }
          }
+         
       } catch (IOException x) {
          System.err.println(x);
       }
@@ -81,7 +121,21 @@ public class FileReader
          // handle exception
       }
    }
+   
+   
+   public static void regexChecker(String theRegex, String str2Check){
 
+      Pattern checkRegex = Pattern.compile(theRegex);
+      
+      Matcher regexMatcher = checkRegex.matcher( str2Check );
+      
+      while ( regexMatcher.find() ){
+         if (regexMatcher.group().length() != 0){
+            
+         }
+      }
+      
+   }
 
 
 
