@@ -27,7 +27,6 @@ public class FileReader
 
    public static void openFileChooser() {
       JFileChooser chooser = new JFileChooser();
-      //UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
       int returnVal = chooser.showOpenDialog(null);
       if(returnVal == JFileChooser.APPROVE_OPTION) {
          System.out.println("You chose to open this file: " +
@@ -41,51 +40,71 @@ public class FileReader
 
    private static void readFile() {
       Path file = asmFilePath;
-      String cmd = new String();
-      String registers = new String();
-      String reg1 = new String();
-      String reg2 = new String();
-      String reg3 = new String();
+      String cmd = "";
+      String registers = "";
+      String reg1 = "";
+      String reg2 = "";
+      String reg3 = "";
+      String label = "";
+      String comment = "";
+      String inLineLabel = "";
 
       try (InputStream in = Files.newInputStream(file);
             BufferedReader reader =
                   new BufferedReader(new InputStreamReader(in))) {
          String line = new String();
-
+         int lineNumber = 1;
+         
          //break line info command and registers
          while ((line = reader.readLine()) != null) {   
             if(!line.trim().isEmpty()){
-               StringBuilder sbLine = new StringBuilder(line);
+
+               cmd = "";
+               registers = "";
+               reg1 = "";
+               reg2 = "";
+               reg3 = "";
+               label = "";
+               comment = "";
+               inLineLabel = "";
+
+               System.out.println(line);
                
-               //remove white space and commas
-               int setAtIndex = 0;
-               for(int charIndex = 0; charIndex < sbLine.length(); charIndex++){
-                  if(!Character.isWhitespace(sbLine.charAt(charIndex)) || sbLine.charAt(charIndex) != ','){
-                     sbLine.setCharAt(setAtIndex++, sbLine.charAt(charIndex));
+               cmd = regexChecker("^[a-z]+((?=\n)|(?= ))", line);
+               System.out.println(lineNumber + " Cmd: " + cmd);
+
+               registers = regexChecker("\\$[a-z][0-9]", line);
+               System.out.println(lineNumber + " Registers: " + registers);
+
+               label = regexChecker("[a-zA-Z0-9]+:", line);
+               System.out.println(lineNumber + " Label: " + label);
+
+               comment = regexChecker("#.*", line);
+               System.out.println(lineNumber + " Comment: " + comment);
+
+               inLineLabel = regexChecker("[a-zA-Z0-9]*(?=\\()", line);
+               System.out.println(lineNumber + " inLineLabel: " + inLineLabel + "\n\n");
+
+               
+
+               if(registers.length() >= 4){
+                  reg1 = registers.substring(0, 2);
+                  reg2 = registers.substring(2, 4);
+                  if(registers.length() > 4) {
+                     reg3 = registers.substring(4, 6);
                   }
                }
-               sbLine.delete(setAtIndex, line.length());
                
-               line = sbLine.toString();
-
-//               if(line.charAt(0) != ' ' && line.charAt(0) != '#')
-//               {
-//                  cmd.append(line.substring(0, 4));
-//
-//                  //find all registers
-//                  for(int i = 4; i < line.length(); ) {
-//                     if(line.charAt(i) == '$') {
-//                        registers.append(line.substring(i+1, i+3));
-//                        i += 4;
-//                     }
-//                  }
-//               } 
-               
+//               System.out.println("Label: " + label);
+//               System.out.print("Cmd, reg1, inLineLabel, reg2, reg3: " + cmd + "  " + reg1 + " " + 
+//                     inLineLabel + " "+ reg2 + " " + reg3 + " " + comment);                  
+//               System.out.println();
                
                
             }
+            lineNumber++;
          }
-         
+
       } catch (IOException x) {
          System.err.println(x);
       }
@@ -99,9 +118,8 @@ public class FileReader
       return asmFilePath;
    }
 
-   /**
-    * 
-    */
+
+
    public static void setLookAndFeel() {
       try {
          // Set cross-platform Java L&F (also called "Metal")
@@ -121,20 +139,21 @@ public class FileReader
          // handle exception
       }
    }
-   
-   
-   public static void regexChecker(String theRegex, String str2Check){
+
+
+   public static String regexChecker(String theRegex, String str2Check){
 
       Pattern checkRegex = Pattern.compile(theRegex);
-      
-      Matcher regexMatcher = checkRegex.matcher( str2Check );
-      
+
+      Matcher regexMatcher = checkRegex.matcher(str2Check);
+      String returnString = "";
       while ( regexMatcher.find() ){
          if (regexMatcher.group().length() != 0){
-            
+            returnString += regexMatcher.group();
          }
       }
-      
+
+      return returnString;
    }
 
 
