@@ -22,6 +22,7 @@ public class InstructionList
       return codeList.size();
    }
 
+   //prints out comments, command, and registers of each line of code
    public void printArrayList() {
       for(LineOfCode x: codeList) {
          if(!x.getCmd().isEmpty() || !x.getComment().isEmpty()) {
