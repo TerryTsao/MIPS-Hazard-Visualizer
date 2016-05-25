@@ -1,10 +1,6 @@
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.Component;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,8 +13,19 @@ import java.util.regex.*;
 
 public class FileReader
 {
-   static File asmFile;
-   static Path asmFilePath;
+   private static File asmFile;
+   private static Path asmFilePath;
+   private static LineOfCode lineOfCode;
+   private static InstructionList list = new InstructionList();
+
+   private static String cmd = "";
+   private static String registers = "";
+   private static String reg1 = "";
+   private static String reg2 = "";
+   private static String reg3 = "";
+   private static String label = "";
+   private static String comment = "";
+   private static String inLineLabel = "";
 
 
    public FileReader(){
@@ -30,7 +37,7 @@ public class FileReader
       int returnVal = chooser.showOpenDialog(null);
       if(returnVal == JFileChooser.APPROVE_OPTION) {
          System.out.println("You chose to open this file: " +
-               chooser.getSelectedFile().getName());
+               chooser.getSelectedFile().getName() + "\n");
          asmFile = chooser.getSelectedFile();
          asmFilePath = Paths.get( asmFile.getPath());
          System.out.println(asmFilePath);
@@ -40,25 +47,21 @@ public class FileReader
 
    private static void readFile() {
       Path file = asmFilePath;
-      String cmd = "";
-      String registers = "";
-      String reg1 = "";
-      String reg2 = "";
-      String reg3 = "";
-      String label = "";
-      String comment = "";
-      String inLineLabel = "";
+
 
       try (InputStream in = Files.newInputStream(file);
             BufferedReader reader =
                   new BufferedReader(new InputStreamReader(in))) {
          String line = new String();
-         int lineNumber = 1;
          
-         //break line info command and registers
+         //unused counter that keeps tracks of which line of code we're on. May be deleted.
+         int lineNumber = 1;
+
+         //Read line by line and break up code into its components
          while ((line = reader.readLine()) != null) {   
             if(!line.trim().isEmpty()){
 
+               //reset strings
                cmd = "";
                registers = "";
                reg1 = "";
@@ -68,56 +71,51 @@ public class FileReader
                comment = "";
                inLineLabel = "";
 
-               System.out.println(line);
-               
-               cmd = regexChecker("^[a-z]+((?=\n)|(?= ))", line);
-               System.out.println(lineNumber + " Cmd: " + cmd);
-
+               //set strings to corresponding parts of code
+               cmd = regexChecker("^[a-z]+(?:$| )", line);
                registers = regexChecker("\\$[a-z][0-9]", line);
-               System.out.println(lineNumber + " Registers: " + registers);
-
                label = regexChecker("[a-zA-Z0-9]+:", line);
-               System.out.println(lineNumber + " Label: " + label);
-
                comment = regexChecker("#.*", line);
-               System.out.println(lineNumber + " Comment: " + comment);
-
                inLineLabel = regexChecker("[a-zA-Z0-9]*(?=\\()", line);
-               System.out.println(lineNumber + " inLineLabel: " + inLineLabel + "\n\n");
-
                
-
-               if(registers.length() >= 4){
-                  reg1 = registers.substring(0, 2);
-                  reg2 = registers.substring(2, 4);
-                  if(registers.length() > 4) {
-                     reg3 = registers.substring(4, 6);
+               //set individual registers
+               if(registers.length() >= 3){
+                  reg1 = registers.substring(0, 3);
+                  if(registers.length() >=6){
+                     reg2 = registers.substring(3, 6);
+                     if(registers.length() > 6) {
+                        reg3 = registers.substring(6, 9);
+                     }
                   }
                }
-               
-//               System.out.println("Label: " + label);
-//               System.out.print("Cmd, reg1, inLineLabel, reg2, reg3: " + cmd + "  " + reg1 + " " + 
-//                     inLineLabel + " "+ reg2 + " " + reg3 + " " + comment);                  
-//               System.out.println();
-               
-               
+
+               createAndAddLineOfCode(); 
+
             }
             lineNumber++;
          }
+         
+         System.out.println("\n\n");
+         list.printArrayList();
 
       } catch (IOException x) {
          System.err.println(x);
       }
    }
 
-   public static File getFile() {
+   public File getFile() {
       return asmFile;
    }
 
-   public static Path getPath() {
+   public Path getPath() {
       return asmFilePath;
    }
 
+
+   private static void createAndAddLineOfCode() {
+      lineOfCode = new LineOfCode(label, cmd, reg1, reg2, reg3, inLineLabel, comment);
+      list.addLineOfCode(lineOfCode);
+   }
 
 
    public static void setLookAndFeel() {
@@ -160,14 +158,8 @@ public class FileReader
 
    public static void main(String [] args)
    {
-
       FileReader.setLookAndFeel();
       FileReader.openFileChooser();
-
-
-
-
-
    }
 
 
