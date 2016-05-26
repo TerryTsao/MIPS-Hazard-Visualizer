@@ -36,7 +36,7 @@ public class FileReader
    public static void openFileChooser() {
       JFileChooser chooser = new JFileChooser();
       int returnVal = chooser.showOpenDialog(null);
-      if(returnVal == JFileChooser.APPROVE_OPTION) {
+      if (returnVal == JFileChooser.APPROVE_OPTION) {
          System.out.println("You chose to open this file: " +
                chooser.getSelectedFile().getName() + "\n");
          asmFile = chooser.getSelectedFile();
@@ -80,11 +80,11 @@ public class FileReader
                inLineLabel = regexChecker("[a-zA-Z0-9]*(?=\\()", line);
                
                //set individual registers
-               if(registers.length() >= 3){
+               if (registers.length() >= 3) {
                   arg1 = registers.substring(0, 3);
-                  if(registers.length() >=6){
+                  if (registers.length() >=6) {
                      arg2 = registers.substring(3, 6);
-                     if(registers.length() > 6) {
+                     if (registers.length() > 6) {
                         arg3 = registers.substring(6, 9);
                      }
                   }
@@ -112,12 +112,10 @@ public class FileReader
       return asmFilePath;
    }
 
-
    private static void createAndAddLineOfCode() {
       lineOfCode = new Instruction(label, cmd, arg1, arg2, arg3, inLineLabel, comment);
       list.addInstruction(lineOfCode);
    }
-
 
    public static void setLookAndFeel() {
       try {
@@ -139,15 +137,14 @@ public class FileReader
       }
    }
 
-
-   public static String regexChecker(String theRegex, String str2Check){
+   public static String regexChecker(String theRegex, String str2Check) {
 
       Pattern checkRegex = Pattern.compile(theRegex);
 
       Matcher regexMatcher = checkRegex.matcher(str2Check);
       String returnString = "";
       while ( regexMatcher.find() ){
-         if (regexMatcher.group().length() != 0){
+         if (regexMatcher.group().length() != 0) {
             returnString += regexMatcher.group();
          }
       }
@@ -155,17 +152,8 @@ public class FileReader
       return returnString;
    }
 
-
-
-   public static void main(String [] args)
-   {
+   public static void main(String [] args) {
       FileReader.setLookAndFeel();
       FileReader.openFileChooser();
    }
-
-
-
-
-
-
 }

@@ -29,14 +29,11 @@ public class InstructionList
          if(!x.getCmd().isEmpty() || !x.getComment().isEmpty()) {
             System.out.println(
                   x.getCmd() + " " +
-                        x.getReg1() + " " +
-                        x.getReg2() + " " +
-                        x.getReg3() + " " +
+                        x.getArg1() + " " +
+                        x.getArg2() + " " +
+                        x.getArg3() + " " +
                         x.getComment() + "\n");
          }
-
       }
    }
-
-
 }

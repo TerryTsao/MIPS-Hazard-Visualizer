@@ -26,34 +26,64 @@ public class Instruction
       this.comment = comment;
    }
 
-   public String getLabel(){
+   public String getLabel() {
       return label;
    }
 
-   public  String getCmd(){
+   public String getCmd() {
       return cmd;
    }
 
-   public  String getReg1(){
+   public String getArg1() {
       return arg1;
    }
 
-   public  String getReg2(){
+   public String getArg2() {
       return arg2;
    }
 
-   public  String getReg3(){
+   public String getArg3() {
       return arg3;
    }
 
-   public  String getInLineLabel(){
+   public String getInLineLabel() {
       return inLineLabel;
    }
 
-   public  String getComment(){
+   public String getComment() {
       return comment;
    }
-
-
-
+   
+   public String[] getInputReg() {
+      String[] input;
+      switch (cmd) {
+      case "beq":
+      case "bne":
+      case "sw":
+         input = new String[1];
+         input[0] = arg1;
+         break;
+      default:
+         input = new String[2];
+         input[0] = arg2;
+         input[1] = arg3;
+      }
+      return input;
+   }
+   
+   public String[] getOutputReg() {
+      String[] output;
+      switch (cmd) {
+      case "beq":
+      case "bne":
+      case "lw":
+      case "sw":
+         output = new String[0];
+         break;
+      default:
+         output = new String[1];
+         output[0] = arg1;
+      }
+      return output;
+   }
 }
