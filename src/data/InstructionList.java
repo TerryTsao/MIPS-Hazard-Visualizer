@@ -1,20 +1,21 @@
+package data;
 import java.util.ArrayList;
 
 public class InstructionList
 {
 
-   private ArrayList<LineOfCode> codeList;
+   private ArrayList<Instruction> codeList;
 
    public InstructionList() {
-      codeList = new ArrayList<LineOfCode>();
+      codeList = new ArrayList<Instruction>();
 
    }
 
-   public void addLineOfCode(LineOfCode lineOfCode) {
-      codeList.add(lineOfCode);
+   public void addInstruction(Instruction instruction) {
+      codeList.add(instruction);
    }
 
-   public LineOfCode getLineOfCodeAtIndex(int index) {
+   public Instruction getInstructionAtIndex(int index) {
       return codeList.get(index);
    }
 
@@ -24,7 +25,7 @@ public class InstructionList
 
    //prints out comments, command, and registers of each line of code
    public void printArrayList() {
-      for(LineOfCode x: codeList) {
+      for(Instruction x: codeList) {
          if(!x.getCmd().isEmpty() || !x.getComment().isEmpty()) {
             System.out.println(
                   x.getCmd() + " " +

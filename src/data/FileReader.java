@@ -1,3 +1,4 @@
+package data;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -15,14 +16,14 @@ public class FileReader
 {
    private static File asmFile;
    private static Path asmFilePath;
-   private static LineOfCode lineOfCode;
+   private static Instruction lineOfCode;
    private static InstructionList list = new InstructionList();
 
    private static String cmd = "";
    private static String registers = "";
-   private static String reg1 = "";
-   private static String reg2 = "";
-   private static String reg3 = "";
+   private static String arg1 = "";
+   private static String arg2 = "";
+   private static String arg3 = "";
    private static String label = "";
    private static String comment = "";
    private static String inLineLabel = "";
@@ -64,9 +65,9 @@ public class FileReader
                //reset strings
                cmd = "";
                registers = "";
-               reg1 = "";
-               reg2 = "";
-               reg3 = "";
+               arg1 = "";
+               arg2 = "";
+               arg3 = "";
                label = "";
                comment = "";
                inLineLabel = "";
@@ -80,11 +81,11 @@ public class FileReader
                
                //set individual registers
                if(registers.length() >= 3){
-                  reg1 = registers.substring(0, 3);
+                  arg1 = registers.substring(0, 3);
                   if(registers.length() >=6){
-                     reg2 = registers.substring(3, 6);
+                     arg2 = registers.substring(3, 6);
                      if(registers.length() > 6) {
-                        reg3 = registers.substring(6, 9);
+                        arg3 = registers.substring(6, 9);
                      }
                   }
                }
@@ -113,8 +114,8 @@ public class FileReader
 
 
    private static void createAndAddLineOfCode() {
-      lineOfCode = new LineOfCode(label, cmd, reg1, reg2, reg3, inLineLabel, comment);
-      list.addLineOfCode(lineOfCode);
+      lineOfCode = new Instruction(label, cmd, arg1, arg2, arg3, inLineLabel, comment);
+      list.addInstruction(lineOfCode);
    }
 
 

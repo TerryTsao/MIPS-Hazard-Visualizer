@@ -1,26 +1,27 @@
+package data;
 
-public class LineOfCode
+public class Instruction
 {
 
-   private String label, cmd, reg1, reg2, reg3, inLineLabel, comment = "";
+   private String label, cmd, arg1, arg2, arg3, inLineLabel, comment = "";
 
-   public LineOfCode() {
+   public Instruction() {
       this.label = "";
       this.cmd = "";
-      this.reg1 = "";
-      this.reg2 = "";
-      this.reg3 = "";
+      this.arg1 = "";
+      this.arg2 = "";
+      this.arg3 = "";
       this.inLineLabel = "";
       this.comment = "";
    }
 
-   public LineOfCode(String label, String cmd, String reg1, String reg2, String reg3, 
+   public Instruction(String label, String cmd, String arg1, String arg2, String arg3, 
          String inLineLabel, String comment) {
       this.label = label;
       this.cmd = cmd;
-      this.reg1 = reg1;
-      this.reg2 = reg2;
-      this.reg3 = reg3;
+      this.arg1 = arg1;
+      this.arg2 = arg2;
+      this.arg3 = arg3;
       this.inLineLabel = inLineLabel;
       this.comment = comment;
    }
@@ -34,15 +35,15 @@ public class LineOfCode
    }
 
    public  String getReg1(){
-      return reg1;
+      return arg1;
    }
 
    public  String getReg2(){
-      return reg2;
+      return arg2;
    }
 
    public  String getReg3(){
-      return reg3;
+      return arg3;
    }
 
    public  String getInLineLabel(){
