@@ -1,6 +1,7 @@
 package gui.tester;
 
-import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -13,9 +14,9 @@ public class TestProcessorDiagramPrototype {
       JPanel panel = new JPanel();
       frame.setVisible(true);
       frame.add(panel);
-      panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+      panel.setLayout(new BorderLayout());
       ProcessorDiagram processor = new ProcessorDiagram();
-      panel.add(processor);
+      panel.add(processor, BorderLayout.CENTER);
       frame.pack();
    }
 }
