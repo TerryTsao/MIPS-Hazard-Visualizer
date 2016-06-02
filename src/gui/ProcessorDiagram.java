@@ -1,34 +1,81 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Rectangle;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
 
-public class ProcessorDiagram extends JPanel {
-   private final String[] STAGE_NAMES = { "IF", "ID", "EX", "MEM", "WB" };
+public class ProcessorDiagram {
+   private BufferedImage processorImage;
+
+   public static final int INDENT = 30;
+
+   public static final int Y_DISTANCE = 30;
+
+   public static final Point ORIGIN = new Point(100, 100);
+
+   public static final double SCALE_RATIO = 3.0;
+
+   private int level;
 
    public ProcessorDiagram() {
-      setLayout(new GridBagLayout());
-      setBorder(BorderFactory.createLineBorder(Color.red));
-      addStages();
+      try {
+         processorImage = ImageIO.read(new File("resources/Pipeline.png"));
+      } catch (IOException ex) {}
+      level = 0;
    }
 
-   private void addStages() {
-      for (int i = 0; i < 5; i++) {
-         StageDiagram is;
-         is = new StageDiagram(STAGE_NAMES[i],
-               new Rectangle(0, 0, 100, 100));
-         GridBagConstraints constraint = new GridBagConstraints();
-         constraint.gridx = i;
-         constraint.gridy = 0;
-         constraint.weightx = 0.5;
-         constraint.ipady = 100;
-         constraint.fill = GridBagConstraints.HORIZONTAL;
-         add(is, constraint);
-      }
+   public ProcessorDiagram(int level) {
+      this();
+      setLevel(level);
+   }
+
+   /**
+    * @return the processorImage
+    */
+   public BufferedImage getProcessorImage() {
+      return processorImage;
+   }
+
+   /**
+    * @param processorImage
+    *           the processorImage to set
+    */
+   public void setProcessorImage(BufferedImage processorImage) {
+      this.processorImage = processorImage;
+   }
+
+   /**
+    * @return the level
+    */
+   public int getLvel() {
+      return level;
+   }
+
+   /**
+    * @param level
+    *           the level to set
+    */
+   public void setLevel(int level) {
+      this.level = level >= 0 && level < PipelineDiagram.NUM_OF_LINES ? 
+            level : 0;
+   }
+
+   public void draw(Graphics g) {
+      Graphics2D g2d = (Graphics2D)g;
+      AffineTransform trans = new AffineTransform();
+      trans.translate(ORIGIN.x + INDENT * level * SCALE_RATIO,
+            ORIGIN.y + Y_DISTANCE * level * SCALE_RATIO);
+      trans.scale(SCALE_RATIO * 140 / processorImage.getWidth(),
+            SCALE_RATIO * 33 / processorImage.getHeight());
+      AffineTransformOp op =
+            new AffineTransformOp(trans, AffineTransformOp.TYPE_BILINEAR);
+      g2d.drawImage(processorImage, op, 0, 0);
    }
 }
