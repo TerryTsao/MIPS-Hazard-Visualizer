@@ -10,7 +10,8 @@ public class Main {
          public void run() {
             JFrame frame = new JFrame("MIPS Hazard Visualizer");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(1000, 750);
+            frame.setSize(GUIConstants.INIT_FRAME_WIDTH,
+                  GUIConstants.INIT_FRAME_HEIGHT);
             frame.setVisible(true);
             PipelineDiagram pipeline = new PipelineDiagram();
             frame.add(pipeline);
