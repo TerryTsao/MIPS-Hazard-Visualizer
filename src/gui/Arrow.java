@@ -33,16 +33,16 @@ public class Arrow extends JComponent {
     * @param g
     * @param ship
     */
-   void draw(Graphics g, int coordX, int coordYBegin, int coordYEnd) {
+   void draw(Graphics g) {
       Graphics2D g2d = (Graphics2D) g.create();
 
       // Draw vertical arrow
       g2d.setColor(Color.red);
       g2d.setStroke(new BasicStroke(3));
-      g2d.drawLine(coordX, coordYBegin, coordX, coordYEnd);
+      g2d.drawLine((int)posX, (int)posY, (int)posX, (int)(posY + length));
       g2d.setStroke(new BasicStroke(0));
-      g2d.fillPolygon(new int[] {coordX+5, coordX, coordX-5},
-            new int[] {coordYEnd, coordYEnd+12, coordYEnd}, 3);
+      g2d.fillPolygon(new int[] {(int)posX+5, (int)posX, (int)posX-5},
+            new int[] {(int)(posY + length), (int)(posY + length + 12), (int)(posY + length)}, 3);
    }
 
 
@@ -65,6 +65,44 @@ public class Arrow extends JComponent {
       }
       return false;
    }
+
+
+   public boolean setPosX(double posX) {
+      if(posX >= 0) {
+         this.posX = posX;
+         return true;
+      }
+      return false;
+   }
+
+   public boolean setPosY(double posY) {
+      if(posY >= 0) {
+         this.posY = posY;
+         return true;
+      }
+      return false;
+   }
+
+   public boolean setLength(double length) {
+      if(length >= 0) {
+         this.length = length;
+         return true;
+      }
+      return false;
+   }
+
+   public double getPosX() {
+      return posX;
+   }
+
+   public double getPosY() {
+      return posY;
+   }
+
+   public double getLength() {
+      return length;
+   }
+
 }
 
 
