@@ -14,7 +14,7 @@ import data.InstructionList;
 public class InstructionPanel extends JPanel {
    public static final int NUM_OF_LINES = 5;
 
-   public static final int INDENT = 20;
+   public static final int INDENT = 30;
 
    private String[] instructions;
    private InstructionList iListReference;
@@ -43,11 +43,11 @@ public class InstructionPanel extends JPanel {
       setOpaque(true);
       setPreferredSize(new Dimension(300,900));
 
-      // double xScale = getWidth()
-      // / (double)GUIConstants.INSTRUCTION_PANEL_REF_WIDTH;
-      // double yScale = getHeight()
-      // / (double)GUIConstants.INSTRUCTION_PANEL_REF_HEIGHT;
-      // g2d.scale(xScale, yScale);
+      double xScale =
+            getWidth() / (double)GUIConstants.INSTRUCTION_PANEL_REF_WIDTH;
+      double yScale =
+            getHeight() / (double)GUIConstants.INSTRUCTION_PANEL_REF_HEIGHT;
+      g2d.scale(xScale, yScale);
 
       // Anti-aliasing
       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -57,7 +57,7 @@ public class InstructionPanel extends JPanel {
 
       for (int i = 0; i < NUM_OF_LINES; i++) {
          int y = (int)(ProcessorDiagram.ORIGIN.y + ProcessorDiagram.Y_DISTANCE
-                     * (i + 0.7) * ProcessorDiagram.SCALE_RATIO);
+                     * (i + 0.69) * ProcessorDiagram.SCALE_RATIO);
          g2d.drawString(instructions[i], INDENT, y);
          System.out.println(y);
       }
