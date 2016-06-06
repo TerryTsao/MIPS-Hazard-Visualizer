@@ -2,12 +2,11 @@ package gui;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import data.*;
 
 public class Main {
    public static void main(String[] args) {
-      FileReader.setLookAndFeel();
-      FileReader.openFileChooser();
+      // FileReader.setLookAndFeel();
+      // FileReader.openFileChooser();
       SwingUtilities.invokeLater(new Runnable() {
          @Override
          public void run() {
