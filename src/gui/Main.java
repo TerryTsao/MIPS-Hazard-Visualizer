@@ -1,10 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Main {
@@ -20,13 +16,8 @@ public class Main {
             frame.setSize(GUIConstants.INIT_FRAME_WIDTH,
                   GUIConstants.INIT_FRAME_HEIGHT);
             frame.setVisible(true);
-            JPanel mainPanel = new JPanel(new BorderLayout());
+            MainPanel mainPanel = new MainPanel();
             frame.add(mainPanel);
-            mainPanel.setBackground(Color.cyan);
-            InstructionPanel instructionPanel = new InstructionPanel();
-            PipelineDiagram pipelinePanel = new PipelineDiagram();
-            mainPanel.add(instructionPanel, BorderLayout.WEST);
-            mainPanel.add(pipelinePanel, BorderLayout.CENTER);
          }
       });
    }
