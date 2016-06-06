@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
@@ -16,6 +17,13 @@ public class MainPanel extends JPanel {
       pipelinePanel = new PipelineDiagram();
       add(instructionPanel, BorderLayout.WEST);
       add(pipelinePanel, BorderLayout.CENTER);
+   }
+
+   @Override
+   public void paintComponent(Graphics g) {
+      super.paintComponent(g);
+      GUIConstants.mainPanelWidth = getWidth();
+      GUIConstants.mainPanelHeight = getHeight();
    }
 
    /**

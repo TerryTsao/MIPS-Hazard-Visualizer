@@ -38,6 +38,8 @@ public class InstructionPanel extends JPanel {
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
+      setPreferredSize(new Dimension(GUIConstants.mainPanelWidth / 3,
+            GUIConstants.mainPanelHeight));
       Graphics2D g2d = (Graphics2D)g;
       setBackground(Color.blue);
       setOpaque(true);

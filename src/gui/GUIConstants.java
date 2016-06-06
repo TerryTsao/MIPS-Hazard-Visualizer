@@ -9,4 +9,7 @@ public class GUIConstants {
 
    public static final int PIPELINE_PANEL_REF_WIDTH = 982;
    public static final int PIPELINE_PANEL_REF_HEIGHT = 703;
+
+   public static int mainPanelWidth;
+   public static int mainPanelHeight;
 }
