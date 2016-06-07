@@ -46,6 +46,8 @@ public class Arrow extends JComponent {
    }
 
 
+   //When a value needs to be forwarded from one function to another, an arrow will be drawn accordingly
+   //TODO: Handle cases where arrow needs to differentiate between rs and rt registers.
    public boolean setArrowPosition(ProcessorDiagram pro1, ProcessorDiagram pro2, Arrow.cycleType type) {
       if(pro1 != pro2) {
          int levelDifference = pro2.getLevel() - pro1.getLevel();

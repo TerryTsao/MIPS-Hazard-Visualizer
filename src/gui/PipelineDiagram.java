@@ -36,8 +36,10 @@ public class PipelineDiagram extends JPanel {
 
       for (ProcessorDiagram processor : processorDiagrams)
          processor.draw(g);
-      
-      arrowTest.draw(g, 432, 240, 306);
+      arrowTest.setPosX(432);
+      arrowTest.setPosY(240);
+      arrowTest.setLength(66);
+      arrowTest.draw(g);
 
       System.out.println(getWidth() + " " + getHeight());
 
