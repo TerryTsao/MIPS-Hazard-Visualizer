@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -15,6 +17,8 @@ public class Main {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(GUIConstants.INIT_FRAME_WIDTH,
                   GUIConstants.INIT_FRAME_HEIGHT);
+            frame.setMinimumSize(new Dimension(GUIConstants.MIN_FRAME_WIDTH,
+                  GUIConstants.MIN_FRAME_HEIGHT));
             frame.setVisible(true);
             MainPanel mainPanel = new MainPanel();
             frame.add(mainPanel);
