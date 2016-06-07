@@ -5,22 +5,27 @@ public class InstructionList
 {
 
    private ArrayList<Instruction> codeList;
+   private int programCounter;
 
    public InstructionList() {
       codeList = new ArrayList<Instruction>();
-
+      programCounter = 0;
    }
 
    public void addInstruction(Instruction instruction) {
       codeList.add(instruction);
    }
 
-   public Instruction getInstructionAtIndex(int index) {
-      return codeList.get(index);
+   public String getInstructionAtIndex(int index) {
+      return codeList.get(index).getInstructionString();
    }
 
    public int getInstructionListLength() {
       return codeList.size();
+   }
+
+   public int getProgramCounter() {
+      return programCounter;
    }
 
    //prints out comments, command, and registers of each line of code

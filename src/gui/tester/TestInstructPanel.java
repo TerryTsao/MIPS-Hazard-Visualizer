@@ -1,13 +1,14 @@
-package gui;
+package gui.tester;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Main {
+import gui.GUIGlobal;
+import gui.InstructionPanel;
+
+public class TestInstructPanel {
    public static void main(String[] args) {
       // FileReader.setLookAndFeel();
       // FileReader.openFileChooser();
@@ -18,15 +19,9 @@ public class Main {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(GUIGlobal.INIT_FRAME_WIDTH,
                   GUIGlobal.INIT_FRAME_HEIGHT);
-            frame.setMinimumSize(new Dimension(GUIGlobal.MIN_FRAME_WIDTH,
-                  GUIGlobal.MIN_FRAME_HEIGHT));
             frame.setVisible(true);
-            JPanel panel = new JPanel(new BorderLayout());
-            MainPanel mainPanel = new MainPanel();
-            ControlPanel ctrlPanel = new ControlPanel();
-            panel.add(ctrlPanel, BorderLayout.NORTH);
-            panel.add(mainPanel, BorderLayout.CENTER);
-            frame.add(panel);
+            InstructionPanel ip = new InstructionPanel();
+            frame.add(ip, BorderLayout.WEST);
          }
       });
    }

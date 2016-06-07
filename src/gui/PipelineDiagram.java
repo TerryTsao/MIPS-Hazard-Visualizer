@@ -26,8 +26,10 @@ public class PipelineDiagram extends JPanel {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
 
-      double xScale = getWidth() / (double)GUIConstants.PIPELINE_PANEL_REF_WIDTH;
-      double yScale = getHeight() / (double)GUIConstants.PIPELINE_PANEL_REF_HEIGHT;
+      double xScale = getWidth() 
+            / (double)GUIGlobal.PIPELINE_PANEL_REF_WIDTH;
+      double yScale = getHeight() 
+            / (double)GUIGlobal.PIPELINE_PANEL_REF_HEIGHT;
       g2d.scale(xScale, yScale);
 
       // Anti-aliasing
@@ -37,9 +39,6 @@ public class PipelineDiagram extends JPanel {
       for (ProcessorDiagram processor : processorDiagrams)
          processor.draw(g);
       
-      arrowTest.draw(g, 432, 240, 306);
-
-      System.out.println(getWidth() + " " + getHeight());
-
+      // arrowTest.draw(g, 432, 240, 306);
    }
 }
