@@ -54,7 +54,7 @@ public class ProcessorDiagram {
    /**
     * @return the level
     */
-   public int getLvel() {
+   public int getLevel() {
       return level;
    }
 
@@ -63,8 +63,7 @@ public class ProcessorDiagram {
     *           the level to set
     */
    public void setLevel(int level) {
-      this.level = level >= 0 && level < PipelineDiagram.NUM_OF_LINES ? 
-            level : 0;
+      this.level = level >= 0 && level < PipelineDiagram.NUM_OF_LINES ? level : 0;
    }
 
    public void draw(Graphics g) {
@@ -72,8 +71,7 @@ public class ProcessorDiagram {
       AffineTransform trans = new AffineTransform();
       trans.translate(ORIGIN.x + INDENT * level * SCALE_RATIO,
             ORIGIN.y + Y_DISTANCE * level * SCALE_RATIO);
-      trans.scale(SCALE_RATIO * 140 / processorImage.getWidth(),
-            SCALE_RATIO * 33 / processorImage.getHeight());
+      trans.scale(SCALE_RATIO / 10 , SCALE_RATIO / 10);
       AffineTransformOp op =
             new AffineTransformOp(trans, AffineTransformOp.TYPE_BILINEAR);
       g2d.drawImage(processorImage, op, 0, 0);

@@ -58,8 +58,8 @@ public class FileReader
          //unused counter that keeps tracks of which line of code we're on. May be deleted.
          int lineNumber = 1;
 
-         //Read line by line and break up code into its components
-         while ((line = reader.readLine()) != null) {   
+         //Read line by line and break up code into its components. Stop reading at ".data"
+         while ((line = reader.readLine()) != null && !line.equals( ".data")) {   
             if(!line.trim().isEmpty()){
 
                //reset strings

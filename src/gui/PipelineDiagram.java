@@ -12,11 +12,15 @@ public class PipelineDiagram extends JPanel {
    public static final int NUM_OF_LINES = 5;
 
    private ProcessorDiagram[] processorDiagrams;
+   private Arrow arrowTest;
+   //private Arrow [] arrowArray; //holds all arrows to be drawn.
 
    public PipelineDiagram() {
       processorDiagrams = new ProcessorDiagram[NUM_OF_LINES];
       for (int i = 0; i < NUM_OF_LINES; i++)
          processorDiagrams[i] = new ProcessorDiagram(i);
+      
+      arrowTest = new Arrow();
    }
 
    @Override
@@ -39,6 +43,8 @@ public class PipelineDiagram extends JPanel {
 
       for (ProcessorDiagram processor : processorDiagrams)
          processor.draw(g);
+      
+      // arrowTest.draw(g, 432, 240, 306);
 
       System.out.println(getWidth() + " " + getHeight());
 
