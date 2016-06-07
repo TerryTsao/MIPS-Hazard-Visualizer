@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -27,9 +25,6 @@ public class PipelineDiagram extends JPanel {
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
-      setBackground(Color.red);
-      setOpaque(true);
-      setPreferredSize(new Dimension(300,900));
 
       double xScale = getWidth() 
             / (double)GUIConstants.PIPELINE_PANEL_REF_WIDTH;
@@ -45,8 +40,5 @@ public class PipelineDiagram extends JPanel {
          processor.draw(g);
       
       // arrowTest.draw(g, 432, 240, 306);
-
-      System.out.println(getWidth() + " " + getHeight());
-
    }
 }

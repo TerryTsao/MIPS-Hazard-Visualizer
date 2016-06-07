@@ -41,9 +41,6 @@ public class InstructionPanel extends JPanel {
       setPreferredSize(new Dimension(GUIConstants.mainPanelWidth / 3,
             GUIConstants.mainPanelHeight));
       Graphics2D g2d = (Graphics2D)g;
-      setBackground(Color.blue);
-      setOpaque(true);
-      setPreferredSize(new Dimension(300,900));
 
       double xScale =
             getWidth() / (double)GUIConstants.INSTRUCTION_PANEL_REF_WIDTH;
@@ -61,7 +58,6 @@ public class InstructionPanel extends JPanel {
          int y = (int)(ProcessorDiagram.ORIGIN.y + ProcessorDiagram.Y_DISTANCE
                      * (i + 0.69) * ProcessorDiagram.SCALE_RATIO);
          g2d.drawString(instructions[i], INDENT, y);
-         System.out.println(y);
       }
    }
 }

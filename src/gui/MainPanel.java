@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -12,7 +11,6 @@ public class MainPanel extends JPanel {
 
    public MainPanel() {
       setLayout(new BorderLayout());
-      setBackground(Color.cyan);
       instructionPanel = new InstructionPanel();
       pipelinePanel = new PipelineDiagram();
       add(instructionPanel, BorderLayout.WEST);
