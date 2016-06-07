@@ -1,8 +1,10 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Main {
@@ -13,15 +15,18 @@ public class Main {
          @Override
          public void run() {
             JFrame frame = new JFrame("MIPS Hazard Visualizer");
-            //frame.setLayout(new BorderLayout());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(GUIGlobal.INIT_FRAME_WIDTH,
                   GUIGlobal.INIT_FRAME_HEIGHT);
             frame.setMinimumSize(new Dimension(GUIGlobal.MIN_FRAME_WIDTH,
                   GUIGlobal.MIN_FRAME_HEIGHT));
             frame.setVisible(true);
+            JPanel panel = new JPanel(new BorderLayout());
             MainPanel mainPanel = new MainPanel();
-            frame.add(mainPanel);
+            ControlPanel ctrlPanel = new ControlPanel();
+            panel.add(ctrlPanel, BorderLayout.NORTH);
+            panel.add(mainPanel, BorderLayout.CENTER);
+            frame.add(panel);
          }
       });
    }
