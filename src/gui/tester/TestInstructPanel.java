@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import gui.GUIConstants;
+import gui.GUIGlobal;
 import gui.InstructionPanel;
 
 public class TestInstructPanel {
@@ -17,8 +17,8 @@ public class TestInstructPanel {
          public void run() {
             JFrame frame = new JFrame("MIPS Hazard Visualizer");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(GUIConstants.INIT_FRAME_WIDTH,
-                  GUIConstants.INIT_FRAME_HEIGHT);
+            frame.setSize(GUIGlobal.INIT_FRAME_WIDTH,
+                  GUIGlobal.INIT_FRAME_HEIGHT);
             frame.setVisible(true);
             InstructionPanel ip = new InstructionPanel();
             frame.add(ip, BorderLayout.WEST);

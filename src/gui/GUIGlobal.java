@@ -1,6 +1,6 @@
 package gui;
 
-public class GUIConstants {
+public class GUIGlobal {
    public static final int INIT_FRAME_WIDTH = 1200;
    public static final int INIT_FRAME_HEIGHT = 750;
    

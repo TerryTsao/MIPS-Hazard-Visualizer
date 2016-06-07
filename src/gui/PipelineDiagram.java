@@ -27,9 +27,9 @@ public class PipelineDiagram extends JPanel {
       Graphics2D g2d = (Graphics2D)g;
 
       double xScale = getWidth() 
-            / (double)GUIConstants.PIPELINE_PANEL_REF_WIDTH;
+            / (double)GUIGlobal.PIPELINE_PANEL_REF_WIDTH;
       double yScale = getHeight() 
-            / (double)GUIConstants.PIPELINE_PANEL_REF_HEIGHT;
+            / (double)GUIGlobal.PIPELINE_PANEL_REF_HEIGHT;
       g2d.scale(xScale, yScale);
 
       // Anti-aliasing

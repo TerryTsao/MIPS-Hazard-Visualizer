@@ -20,8 +20,8 @@ public class MainPanel extends JPanel {
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
-      GUIConstants.mainPanelWidth = getWidth();
-      GUIConstants.mainPanelHeight = getHeight();
+      GUIGlobal.mainPanelWidth = getWidth();
+      GUIGlobal.mainPanelHeight = getHeight();
    }
 
    /**

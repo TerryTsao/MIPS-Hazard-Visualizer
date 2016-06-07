@@ -15,10 +15,10 @@ public class Main {
             JFrame frame = new JFrame("MIPS Hazard Visualizer");
             //frame.setLayout(new BorderLayout());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(GUIConstants.INIT_FRAME_WIDTH,
-                  GUIConstants.INIT_FRAME_HEIGHT);
-            frame.setMinimumSize(new Dimension(GUIConstants.MIN_FRAME_WIDTH,
-                  GUIConstants.MIN_FRAME_HEIGHT));
+            frame.setSize(GUIGlobal.INIT_FRAME_WIDTH,
+                  GUIGlobal.INIT_FRAME_HEIGHT);
+            frame.setMinimumSize(new Dimension(GUIGlobal.MIN_FRAME_WIDTH,
+                  GUIGlobal.MIN_FRAME_HEIGHT));
             frame.setVisible(true);
             MainPanel mainPanel = new MainPanel();
             frame.add(mainPanel);

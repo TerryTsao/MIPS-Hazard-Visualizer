@@ -21,7 +21,8 @@ public class InstructionPanel extends JPanel {
 
    public InstructionPanel() {
       setPreferredSize(
-            new Dimension(GUIConstants.PIPELINE_PANEL_REF_WIDTH / 3, 900));
+            new Dimension(GUIGlobal.PIPELINE_PANEL_REF_WIDTH / 3, 900));
+
       instructions = new String[NUM_OF_LINES];
       for (int i = 0; i < NUM_OF_LINES; i++) {
          instructions[i] = new String("add $t0 $t1 $t2");
@@ -38,14 +39,14 @@ public class InstructionPanel extends JPanel {
    @Override
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
-      setPreferredSize(new Dimension(GUIConstants.mainPanelWidth / 3,
-            GUIConstants.mainPanelHeight));
+      setPreferredSize(new Dimension(GUIGlobal.mainPanelWidth / 3,
+            GUIGlobal.mainPanelHeight));
       Graphics2D g2d = (Graphics2D)g;
 
       double xScale =
-            getWidth() / (double)GUIConstants.INSTRUCTION_PANEL_REF_WIDTH;
+            getWidth() / (double)GUIGlobal.INSTRUCTION_PANEL_REF_WIDTH;
       double yScale =
-            getHeight() / (double)GUIConstants.INSTRUCTION_PANEL_REF_HEIGHT;
+            getHeight() / (double)GUIGlobal.INSTRUCTION_PANEL_REF_HEIGHT;
       g2d.scale(xScale, yScale);
 
       // Anti-aliasing
