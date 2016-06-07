@@ -37,7 +37,7 @@ public class FileReader
       int returnVal = chooser.showOpenDialog(null);
       if (returnVal == JFileChooser.APPROVE_OPTION) {
          //System.out.println("You chose to open this file: " +
-               //chooser.getSelectedFile().getName() + "\n");
+         //chooser.getSelectedFile().getName() + "\n");
          asmFile = chooser.getSelectedFile();
          asmFilePath = Paths.get( asmFile.getPath());
          //System.out.println(asmFilePath);
@@ -47,7 +47,6 @@ public class FileReader
 
    private static void readFile() {
       Path file = asmFilePath;
-
 
       try (InputStream in = Files.newInputStream(file);
             BufferedReader reader =
@@ -60,7 +59,7 @@ public class FileReader
          String pattern = "(\\.\\w+)?(?:\\s*([\\w.]+)\\s*:)?[\\s,]*([\\w.]+)?[\\s,]*(\\$[\\w]+)?[\\s,]*([\\w\\s+\\-(]*[$]?[\\w)]+)?[\\s,]*(\\$*[\\w]+)?[\\s,]*(?:#(.*))?";
          //Regex101 version: (\.\w+)?(?:\s*([\w.]+)\s*:)?[\s,]*([\w.]+)?[\s,]*(\$[\w]+)?[\s,]*([\w\s+\-(]*[$]?[\w)]+)?[\s,]*(\$*[\w]+)?[\s,]*(?:#(.*))?
          //Java-compatible version: (\\.\\w+)?(?:\\s*([\\w.]+)\\s*:)?[\\s,]*([\\w.]+)?[\\s,]*(\\$[\\w]+)?[\\s,]*([\\w\\s+\\-(]*[$]?[\\w)]+)?[\\s,]*(\\$*[\\w]+)?[\\s,]*(?:#(.*))?
-         
+
          Pattern checkRegex = Pattern.compile(pattern);
 
          //Read line by line and break up code into its components. Stop reading at ".data"
@@ -104,7 +103,6 @@ public class FileReader
    }
 
    private static void createAndAddLineOfCode() {
-      //TODO: check for Nulls
       lineOfCode = new Instruction(label, cmd, arg1, arg2, arg3, comment);
       list.addInstruction(lineOfCode);
    }
@@ -128,14 +126,6 @@ public class FileReader
          // handle exception
       }
    }
-
-   /*public static void regexChecker(Matcher m, String theRegex, String str2Check) {
-
-      Pattern checkRegex = Pattern.compile(theRegex);
-      m = checkRegex.matcher(str2Check);
-   }
-
-    */
 
    public static void main(String [] args) {
       FileReader.setLookAndFeel();
