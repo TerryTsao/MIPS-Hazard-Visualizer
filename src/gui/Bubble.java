@@ -6,7 +6,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
@@ -17,29 +21,24 @@ import javax.swing.JComponent;
 public class Bubble extends JComponent {
    //private int size;
    private Image image;
-   private double posX, posY, length;
-
-   private enum cycleType {EX, MEM};
-   /**
-    * Constructor that sets arrow size.
-    */
-   
-   public Bubble(String filename, double posX, double posY) {
-      this((new ImageIcon(filename)).getImage(), posX, posY);
-   }
-   
-   public Bubble(Image img, double posX, double posY) {
-      image = img;
-      this.posX = posX;
-      this.posY = posY;
-   }
+   private double posX, posY;
+   private int level;
+   private final static int RADIUS = 51;
+   private final static int SPACING_BETWEEN_STAGES = 89;
+   private final static int FIRST_LINE_X_POS = 285;
+   private final static int FIRST_LINE_Y_POS = 124;
    
    public Bubble() {
-      
+      this(0);
    }
    
-   public Bubble(double posX, double posY) {
-      
+   public Bubble(int level) {
+      this.level = level;
+      updateXPos(level);
+      updateYPos(level); 
+      try {
+         image = ImageIO.read(new File("resources/BubbleImage.gif"));
+      } catch (IOException ex) {}      
    }
 
    /**
@@ -47,66 +46,50 @@ public class Bubble extends JComponent {
     * Reference: http://stackoverflow.com/questions/4112701/drawing-a-line-with-arrow-in-java
     * 
     * @param g
-    * @param ship
+    * @param io
     */
-   void draw(Graphics g) {
+   void draw(Graphics g, ImageObserver io) {
       Graphics2D g2d = (Graphics2D) g.create();
 
-      // Draw vertical arrow
-      g2d.setColor(Color.red);
-      g2d.setStroke(new BasicStroke(3));
-      g2d.drawLine((int)posX, (int)posY, (int)posX, (int)(posY + length));
-      g2d.setStroke(new BasicStroke(0));
-      g2d.fillPolygon(new int[] {(int)posX+5, (int)posX, (int)posX-5},
-            new int[] {(int)(posY + length), (int)(posY + length + 12), (int)(posY + length)}, 3);
+      //draw 3 bubble images at 3 pipeline stages.
+      g2d.drawImage(image, (int)posX, (int)posY, RADIUS, RADIUS, io);
+      g2d.drawImage(image, (int)posX+SPACING_BETWEEN_STAGES, (int)posY, RADIUS, RADIUS, io);
+      g2d.drawImage(image, (int)posX+(SPACING_BETWEEN_STAGES*2), (int)posY, RADIUS, RADIUS, io);
    }
 
 
-//   //When a value needs to be forwarded from one command to another, an arrow will be drawn accordingly
-//   //TODO: Handle cases where arrow needs to differentiate between rs and rt registers.
-//   public boolean setArrowPosition(ProcessorDiagram pro1, ProcessorDiagram pro2, Arrow.cycleType type) {
-//      if(pro1 != pro2) {
-//         int levelDifference = pro2.getLevel() - pro1.getLevel();
-//         length = levelDifference * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO;
-//         posY =  pro1.getLevel() * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO ;
-//         posX = pro1.getLevel() * ProcessorDiagram.INDENT * (int)ProcessorDiagram.SCALE_RATIO ;
-//         switch (type){
-//         case EX: 
-//            posX += 800 * ProcessorDiagram.SCALE_RATIO;
-//            break;
-//         case MEM:
-//            posX += 1100 * ProcessorDiagram.SCALE_RATIO;
-//            break;
-//         }
-//
+//   public boolean setPosX(double posX) {
+//      if(posX >= 0) {
+//         this.posX = posX;
 //         return true;
 //      }
 //      return false;
 //   }
-
-
-   public boolean setPosX(double posX) {
-      if(posX >= 0) {
-         this.posX = posX;
+//
+//   public boolean setPosY(double posY) {
+//      if(posY >= 0) {
+//         this.posY = posY;
+//         return true;
+//      }
+//      return false;
+//   }
+   
+   public boolean setLevel(int level) {
+      if(level >= 0 && level < PipelineDiagram.NUM_OF_LINES) {
+         this.level = level;
+         updateXPos(level);
+         updateYPos(level);
          return true;
       }
       return false;
    }
-
-   public boolean setPosY(double posY) {
-      if(posY >= 0) {
-         this.posY = posY;
-         return true;
-      }
-      return false;
+   
+   private void updateXPos(int level) {
+      posX = FIRST_LINE_X_POS + (ProcessorDiagram.SCALE_RATIO * ProcessorDiagram.INDENT * level);
    }
-
-   public boolean setLength(double length) {
-      if(length >= 0) {
-         this.length = length;
-         return true;
-      }
-      return false;
+   
+   private void updateYPos(int level) {
+      posY = FIRST_LINE_Y_POS + (ProcessorDiagram.SCALE_RATIO * ProcessorDiagram.Y_DISTANCE * level); 
    }
 
    public double getPosX() {
@@ -117,8 +100,12 @@ public class Bubble extends JComponent {
       return posY;
    }
 
-   public double getLength() {
-      return length;
+   public double getRadius() {
+      return RADIUS;
+   }
+   
+   public int getLevel() {
+      return level;
    }
 
 }

@@ -40,6 +40,7 @@ public class Arrow extends JComponent {
       g2d.setStroke(new BasicStroke(0));
       g2d.fillPolygon(new int[] {(int)posX+5, (int)posX, (int)posX-5},
             new int[] {(int)(posY + length), (int)(posY + length + 12), (int)(posY + length)}, 3);
+      
    }
 
 
@@ -49,6 +50,7 @@ public class Arrow extends JComponent {
       if(pro1 != pro2) {
          int levelDifference = pro2.getLevel() - pro1.getLevel();
          length = levelDifference * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO;
+         //if(need to reach rt line of ALU) length += 24
          posY =  pro1.getLevel() * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO ;
          posX = pro1.getLevel() * ProcessorDiagram.INDENT * (int)ProcessorDiagram.SCALE_RATIO ;
          switch (type){
@@ -59,7 +61,6 @@ public class Arrow extends JComponent {
             posX += 1100 * ProcessorDiagram.SCALE_RATIO;
             break;
          }
-
          return true;
       }
       return false;
