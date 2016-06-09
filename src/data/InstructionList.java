@@ -5,25 +5,31 @@ public class InstructionList
 {
 
    private ArrayList<Instruction> codeList;
+   private int programCounter;
 
    public InstructionList() {
       codeList = new ArrayList<Instruction>();
-
+      programCounter = 0;
    }
 
    public void addInstruction(Instruction instruction) {
       codeList.add(instruction);
    }
 
-   public Instruction getInstructionAtIndex(int index) {
-      return codeList.get(index);
+   public String getInstructionAtIndex(int index) {
+      return codeList.get(index).getInstructionString();
    }
 
    public int getInstructionListLength() {
       return codeList.size();
    }
 
-   //prints out each line of code
+
+   public int getProgramCounter() {
+      return programCounter;
+   }
+
+   //prints each line of code
    public void printArrayList() {
       System.out.println("*******Start of file: ********\n");
       for(Instruction x: codeList) {

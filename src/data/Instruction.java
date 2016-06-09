@@ -48,6 +48,10 @@ public class Instruction
    public String getComment() {
       return comment;
    }
+
+   public String getInstructionString() {
+      return cmd + " " + arg1 + " " + arg2 + " " + arg3;
+   }
    
    public String[] getInputReg() {
       String[] input;
