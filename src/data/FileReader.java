@@ -18,15 +18,14 @@ public class FileReader
    private static Path asmFilePath;
    private static Instruction lineOfCode;
    private static InstructionList list = new InstructionList();
+   private static Matcher match;
 
+   private static String label = "";
    private static String cmd = "";
-   private static String registers = "";
    private static String arg1 = "";
    private static String arg2 = "";
    private static String arg3 = "";
-   private static String label = "";
    private static String comment = "";
-   private static String inLineLabel = "";
 
 
    public FileReader(){
@@ -37,11 +36,11 @@ public class FileReader
       JFileChooser chooser = new JFileChooser();
       int returnVal = chooser.showOpenDialog(null);
       if (returnVal == JFileChooser.APPROVE_OPTION) {
-         System.out.println("You chose to open this file: " +
-               chooser.getSelectedFile().getName() + "\n");
+         //System.out.println("You chose to open this file: " +
+         //chooser.getSelectedFile().getName() + "\n");
          asmFile = chooser.getSelectedFile();
          asmFilePath = Paths.get( asmFile.getPath());
-         System.out.println(asmFilePath);
+         //System.out.println(asmFilePath);
          readFile();
       }
    }
@@ -49,54 +48,45 @@ public class FileReader
    private static void readFile() {
       Path file = asmFilePath;
 
-
       try (InputStream in = Files.newInputStream(file);
             BufferedReader reader =
                   new BufferedReader(new InputStreamReader(in))) {
          String line = new String();
-         
+
          //unused counter that keeps tracks of which line of code we're on. May be deleted.
          int lineNumber = 1;
+
+         String pattern = "(\\.\\w+)?(?:\\s*([\\w.]+)\\s*:)?[\\s,]*([\\w.]+)?[\\s,]*(\\$[\\w]+)?[\\s,]*([\\w\\s+\\-(]*[$]?[\\w)]+)?[\\s,]*(\\$*[\\w]+)?[\\s,]*(?:#(.*))?";
+         //Regex101 version: (\.\w+)?(?:\s*([\w.]+)\s*:)?[\s,]*([\w.]+)?[\s,]*(\$[\w]+)?[\s,]*([\w\s+\-(]*[$]?[\w)]+)?[\s,]*(\$*[\w]+)?[\s,]*(?:#(.*))?
+         //Java-compatible version: (\\.\\w+)?(?:\\s*([\\w.]+)\\s*:)?[\\s,]*([\\w.]+)?[\\s,]*(\\$[\\w]+)?[\\s,]*([\\w\\s+\\-(]*[$]?[\\w)]+)?[\\s,]*(\\$*[\\w]+)?[\\s,]*(?:#(.*))?
+
+         Pattern checkRegex = Pattern.compile(pattern);
 
          //Read line by line and break up code into its components. Stop reading at ".data"
          while ((line = reader.readLine()) != null && !line.equals( ".data")) {   
             if(!line.trim().isEmpty()){
-
                //reset strings
+               label = "";
                cmd = "";
-               registers = "";
                arg1 = "";
                arg2 = "";
                arg3 = "";
-               label = "";
                comment = "";
-               inLineLabel = "";
+               match = checkRegex.matcher(line);
 
-               //set strings to corresponding parts of code
-               cmd = regexChecker("^[a-z]+(?:$| )", line);
-               registers = regexChecker("\\$[a-z][0-9]", line);
-               label = regexChecker("[a-zA-Z0-9]+:", line);
-               comment = regexChecker("#.*", line);
-               inLineLabel = regexChecker("[a-zA-Z0-9]*(?=\\()", line);
-               
-               //set individual registers
-               if (registers.length() >= 3) {
-                  arg1 = registers.substring(0, 3);
-                  if (registers.length() >=6) {
-                     arg2 = registers.substring(3, 6);
-                     if (registers.length() > 6) {
-                        arg3 = registers.substring(6, 9);
-                     }
-                  }
+               if(match.find()) {
+                  label = match.group(2);
+                  cmd = match.group(3);
+                  arg1 = match.group(4);
+                  arg2 = match.group(5);
+                  arg3 = match.group(6);
+                  comment = match.group(7);
+
+                  createAndAddLineOfCode();
                }
-
-               createAndAddLineOfCode(); 
-
             }
             lineNumber++;
          }
-         
-         System.out.println("\n\n");
          list.printArrayList();
 
       } catch (IOException x) {
@@ -113,7 +103,7 @@ public class FileReader
    }
 
    private static void createAndAddLineOfCode() {
-      lineOfCode = new Instruction(label, cmd, arg1, arg2, arg3, inLineLabel, comment);
+      lineOfCode = new Instruction(label, cmd, arg1, arg2, arg3, comment);
       list.addInstruction(lineOfCode);
    }
 
@@ -135,21 +125,6 @@ public class FileReader
       catch (IllegalAccessException e) {
          // handle exception
       }
-   }
-
-   public static String regexChecker(String theRegex, String str2Check) {
-
-      Pattern checkRegex = Pattern.compile(theRegex);
-
-      Matcher regexMatcher = checkRegex.matcher(str2Check);
-      String returnString = "";
-      while ( regexMatcher.find() ){
-         if (regexMatcher.group().length() != 0) {
-            returnString += regexMatcher.group();
-         }
-      }
-
-      return returnString;
    }
 
    public static void main(String [] args) {

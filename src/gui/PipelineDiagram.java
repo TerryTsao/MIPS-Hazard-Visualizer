@@ -11,6 +11,7 @@ public class PipelineDiagram extends JPanel {
 
    private ProcessorDiagram[] processorDiagrams;
    private Arrow arrowTest;
+   private Bubble bubbleTest;
    //private Arrow [] arrowArray; //holds all arrows to be drawn.
 
    public PipelineDiagram() {
@@ -19,6 +20,7 @@ public class PipelineDiagram extends JPanel {
          processorDiagrams[i] = new ProcessorDiagram(i);
       
       arrowTest = new Arrow();
+      bubbleTest = new Bubble();
    }
 
    @Override
@@ -39,6 +41,24 @@ public class PipelineDiagram extends JPanel {
       for (ProcessorDiagram processor : processorDiagrams)
          processor.draw(g);
       
-      // arrowTest.draw(g, 432, 240, 306);
+      arrowTest.setPosX(432);
+      arrowTest.setPosY(240);
+      arrowTest.setLength(66);
+      //arrowTest.draw(g);
+      
+      ProcessorDiagram pro1, pro2;
+      pro1 = new ProcessorDiagram(1);
+      pro2 = new ProcessorDiagram(3);
+      arrowTest.setArrowPosition(pro1, pro2, Arrow.cycleType.MEM);
+      arrowTest.draw(g);
+
+      
+      bubbleTest.setLevel(2);
+      bubbleTest.draw(g, this);
+      
+      
+      
+
+      System.out.println(getWidth() + " " + getHeight());
    }
 }
