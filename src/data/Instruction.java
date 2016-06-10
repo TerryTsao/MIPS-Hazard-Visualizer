@@ -1,5 +1,8 @@
 package data;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Instruction
 {
    private String label, cmd, arg1, arg2, arg3, comment;
@@ -48,10 +51,10 @@ public class Instruction
    }
 
    public String getInstruction() {
-      return (cmd != "" ? cmd + " " : "")
-            + (arg1 != "" ? arg1 + " " : "")
-            + (arg2 != "" ? arg2 + " " : "")
-            + (arg3 != "" ? arg3 + " " : "");
+      return (cmd != null ? cmd + " " : "")
+            + (arg1 != null ? arg1 + " " : "")
+            + (arg2 != null ? arg2 + " " : "")
+            + (arg3 != null ? arg3 + " " : "");
    }
 
    public String getFullInstruction() {
@@ -62,15 +65,28 @@ public class Instruction
             + (arg3 != null ? arg3 + " " : "")
             + (comment != null ? "#" + comment : "");
    }
- 
+
    public String[] getInputReg() {
       String[] input;
       switch (cmd) {
+      case "j":
+      case "jal":
+      case "jalr":
+      case "jr":
+      case "syscall":
+         input = new String[0];
+         break;
       case "beq":
       case "bne":
+      case "la":
+      case "li":
       case "sw":
          input = new String[1];
          input[0] = arg1;
+         break;
+      case "lw":
+         input = new String[1];
+         input[0] = Pattern.compile("\\((\\$\\w+)\\)").matcher(arg2).group();
          break;
       default:
          input = new String[2];
@@ -79,14 +95,18 @@ public class Instruction
       }
       return input;
    }
-   
+
    public String getOutputReg() {
       String output;
       switch (cmd) {
       case "beq":
       case "bne":
-      case "lw":
+      case "j":
+      case "jal":
+      case "jalr":
+      case "jr":
       case "sw":
+      case "syscall":
          output = null;
          break;
       default:
