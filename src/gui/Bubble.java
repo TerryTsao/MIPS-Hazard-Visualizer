@@ -1,17 +1,12 @@
 package gui;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 /**
@@ -43,8 +38,6 @@ public class Bubble extends JComponent {
 
    /**
     * 
-    * Reference: http://stackoverflow.com/questions/4112701/drawing-a-line-with-arrow-in-java
-    * 
     * @param g
     * @param io
     */
@@ -73,7 +66,7 @@ public class Bubble extends JComponent {
 //      }
 //      return false;
 //   }
-   
+
    public boolean setLevel(int level) {
       if(level >= 0 && level < PipelineDiagram.NUM_OF_LINES) {
          this.level = level;
@@ -83,7 +76,7 @@ public class Bubble extends JComponent {
       }
       return false;
    }
-   
+
    private void updateXPos(int level) {
       posX = FIRST_LINE_X_POS + (ProcessorDiagram.SCALE_RATIO * ProcessorDiagram.INDENT * level);
    }
@@ -103,23 +96,9 @@ public class Bubble extends JComponent {
    public double getRadius() {
       return RADIUS;
    }
-   
+
    public int getLevel() {
       return level;
    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

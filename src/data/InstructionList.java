@@ -36,26 +36,13 @@ public class InstructionList
          programCounter += num;
    }
 
-   //prints each line of code
-   public static void printArrayList() {
-      System.out.println("*******Start of file: ********\n");
-      for(Instruction x: list) {
-         if(x.getLabel() != null)
-            System.out.println(x.getLabel() + ":");
-         if(x.getCmd() != null)
-            System.out.print(" " + x.getCmd());
-         if(x.getArg1() != null)
-            System.out.print(" " + x.getArg1());
-         if(x.getArg2() != null)
-            System.out.print(" " + x.getArg2());
-         if(x.getArg3() != null)
-            System.out.print(" " + x.getArg3());
-         if(x.getComment() != null)
-            System.out.print(" #" + x.getComment());
-         
-         System.out.println("\n");
+   // prints interpreted file
+   public static void printList() {
+      System.out.println("******** Start of file ********");
+      for(Instruction i: list) {
+         System.out.println(i.getFullInstruction());
       }
-      System.out.println("*******End of file: ********");
+      System.out.println("******** End of file ********");
 
    }
 }

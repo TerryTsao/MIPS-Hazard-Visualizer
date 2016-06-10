@@ -2,7 +2,6 @@ package data;
 
 public class Instruction
 {
-
    private String label, cmd, arg1, arg2, arg3, comment;
 
    public Instruction() {
@@ -53,6 +52,15 @@ public class Instruction
             + (arg1 != "" ? arg1 + " " : "")
             + (arg2 != "" ? arg2 + " " : "")
             + (arg3 != "" ? arg3 + " " : "");
+   }
+
+   public String getFullInstruction() {
+      return (label != null ? label + ": ": "")
+            + (cmd != null ? cmd + " " : "")
+            + (arg1 != null ? arg1 + " " : "")
+            + (arg2 != null ? arg2 + " " : "")
+            + (arg3 != null ? arg3 + " " : "")
+            + (comment != null ? "#" + comment : "");
    }
  
    public String[] getInputReg() {

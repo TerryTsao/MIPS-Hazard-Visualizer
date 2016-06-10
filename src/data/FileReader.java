@@ -13,29 +13,13 @@ public class FileReader
 {
    private static File asmFile;
    private static Path asmFilePath;
-   private static Instruction lineOfCode;
-   private static Matcher match;
-
-   private static String label = "";
-   private static String cmd = "";
-   private static String arg1 = "";
-   private static String arg2 = "";
-   private static String arg3 = "";
-   private static String comment = "";
-
-   public FileReader(){
-
-   }
 
    public static void openFileChooser() {
       JFileChooser chooser = new JFileChooser();
       int returnVal = chooser.showOpenDialog(null);
       if (returnVal == JFileChooser.APPROVE_OPTION) {
-         //System.out.println("You chose to open this file: " +
-         //chooser.getSelectedFile().getName() + "\n");
          asmFile = chooser.getSelectedFile();
          asmFilePath = Paths.get(asmFile.getPath());
-         //System.out.println(asmFilePath);
          InstructionList.clearList();
          readFile();
       }
@@ -45,8 +29,7 @@ public class FileReader
       Path file = asmFilePath;
 
       try (InputStream in = Files.newInputStream(file);
-            BufferedReader reader =
-                  new BufferedReader(new InputStreamReader(in))) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
          String line = new String();
 
          String pattern = "(\\.\\w+)?(?:\\s*([\\w.]+)\\s*:)?[\\s,]*([\\w.]+)?[\\s,]*(\\$[\\w]+)?[\\s,]*([\\w\\s+\\-(]*[$]?[\\w)]+)?[\\s,]*(\\$*[\\w]+)?[\\s,]*(?:#(.*))?";
@@ -56,33 +39,25 @@ public class FileReader
          Pattern checkRegex = Pattern.compile(pattern);
 
          //Read line by line and break up code into its components. Stop reading at ".data"
-         while ((line = reader.readLine()) != null && !line.equals( ".data")) {   
-            if(!line.trim().isEmpty()){
-               //reset strings
-               label = "";
-               cmd = "";
-               arg1 = "";
-               arg2 = "";
-               arg3 = "";
-               comment = "";
-               match = checkRegex.matcher(line);
+         while ((line = reader.readLine()) != null && !line.equals(".data")) {   
+            if(!line.trim().isEmpty()) {
+               Matcher match = checkRegex.matcher(line);
+               if (match.find()) {
+                  String label = match.group(2);
+                  String cmd = match.group(3);
+                  String arg1 = match.group(4);
+                  String arg2 = match.group(5);
+                  String arg3 = match.group(6);
+                  String comment = match.group(7) != null ? match.group(7).trim() : null;
 
-               if(match.find()) {
-                  label = match.group(2);
-                  cmd = match.group(3);
-                  arg1 = match.group(4);
-                  arg2 = match.group(5);
-                  arg3 = match.group(6);
-                  comment = match.group(7);
-
-                  createAndAddLineOfCode();
+                  addLine(label, cmd, arg1, arg2, arg3, comment);
                }
             }
          }
-         InstructionList.printArrayList();
+         InstructionList.printList();
 
-      } catch (IOException x) {
-         System.err.println(x);
+      } catch (IOException e) {
+         System.err.println(e);
       }
    }
 
@@ -94,9 +69,9 @@ public class FileReader
       return asmFilePath;
    }
 
-   private static void createAndAddLineOfCode() {
-      lineOfCode = new Instruction(label, cmd, arg1, arg2, arg3, comment);
-      InstructionList.addInstruction(lineOfCode);
+   private static void addLine(String label, String cmd,
+         String arg1, String arg2, String arg3, String comment) {
+      InstructionList.addInstruction(new Instruction(label, cmd, arg1, arg2, arg3, comment));
    }
 
    public static void setLookAndFeel() {
