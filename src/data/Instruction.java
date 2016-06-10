@@ -3,7 +3,7 @@ package data;
 public class Instruction
 {
 
-   private String label, cmd, arg1, arg2, arg3, comment = "";
+   private String label, cmd, arg1, arg2, arg3, comment;
 
    public Instruction() {
       this.label = "";
@@ -44,15 +44,17 @@ public class Instruction
       return arg3;
    }
 
-
    public String getComment() {
       return comment;
    }
 
-   public String getInstructionString() {
-      return cmd + " " + arg1 + " " + arg2 + " " + arg3;
+   public String getInstruction() {
+      return (cmd != "" ? cmd + " " : "")
+            + (arg1 != "" ? arg1 + " " : "")
+            + (arg2 != "" ? arg2 + " " : "")
+            + (arg3 != "" ? arg3 + " " : "");
    }
-   
+ 
    public String[] getInputReg() {
       String[] input;
       switch (cmd) {
@@ -70,18 +72,17 @@ public class Instruction
       return input;
    }
    
-   public String[] getOutputReg() {
-      String[] output;
+   public String getOutputReg() {
+      String output;
       switch (cmd) {
       case "beq":
       case "bne":
       case "lw":
       case "sw":
-         output = new String[0];
+         output = null;
          break;
       default:
-         output = new String[1];
-         output[0] = arg1;
+         output = arg1;
       }
       return output;
    }

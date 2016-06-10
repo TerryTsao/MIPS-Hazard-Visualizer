@@ -3,36 +3,39 @@ import java.util.ArrayList;
 
 public class InstructionList
 {
+   private static ArrayList<Instruction> list;
+   private static int programCounter;
 
-   private static ArrayList<Instruction> codeList;
-   private int programCounter;
-
-   public InstructionList() {
-      codeList = new ArrayList<Instruction>();
+   static {
+      list = new ArrayList<Instruction>();
       programCounter = 0;
    }
 
-   public void addInstruction(Instruction instruction) {
-      codeList.add(instruction);
+   public static void addInstruction(Instruction instruction) {
+      list.add(instruction);
    }
 
-   public String getInstructionAtIndex(int index) {
-      return codeList.get(index).getInstructionString();
+   public static String getInstructionAtIndex(int index) {
+      return list.get(index).getInstruction();
    }
 
-   public int getInstructionListLength() {
-      return codeList.size();
+   public static int getInstructionListLength() {
+      return list.size();
    }
 
-
-   public int getProgramCounter() {
+   public static int getProgramCounter() {
       return programCounter;
    }
 
+   public static void shiftProgramCounter(int num) {
+      if (programCounter + num >= 0 && programCounter + num < list.size())
+         programCounter += num;
+   }
+
    //prints each line of code
-   public void printArrayList() {
+   public static void printArrayList() {
       System.out.println("*******Start of file: ********\n");
-      for(Instruction x: codeList) {
+      for(Instruction x: list) {
          if(x.getLabel() != null)
             System.out.println(x.getLabel() + ":");
          if(x.getCmd() != null)

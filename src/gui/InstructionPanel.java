@@ -17,23 +17,20 @@ public class InstructionPanel extends JPanel {
    public static final int INDENT = 30;
 
    private String[] instructions;
-   private InstructionList iListReference;
 
    public InstructionPanel() {
       setPreferredSize(
             new Dimension(GUIGlobal.PIPELINE_PANEL_REF_WIDTH / 3, 900));
 
       instructions = new String[NUM_OF_LINES];
-      for (int i = 0; i < NUM_OF_LINES; i++) {
-         instructions[i] = new String("add $t0 $t1 $t2");
-      }
-      //iListReference = iList;
+      fetchInstructions();
    }
 
    public void fetchInstructions() {
-      int pc = iListReference.getProgramCounter();
-      for (int i = 0; i < NUM_OF_LINES; i++)
-         instructions[i] = iListReference.getInstructionAtIndex(pc + i);
+      for (int i = 0; i < NUM_OF_LINES; i++) {
+         instructions[i] = InstructionList.getInstructionAtIndex(
+               InstructionList.getProgramCounter() + i);
+      }
    }
 
    @Override

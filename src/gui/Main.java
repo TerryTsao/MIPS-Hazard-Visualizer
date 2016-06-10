@@ -7,10 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import data.FileReader;
+
 public class Main {
    public static void main(String[] args) {
-      // FileReader.setLookAndFeel();
-      // FileReader.openFileChooser();
+      FileReader.openFileChooser();
       SwingUtilities.invokeLater(new Runnable() {
          @Override
          public void run() {
@@ -23,7 +24,7 @@ public class Main {
             frame.setVisible(true);
             JPanel panel = new JPanel(new BorderLayout());
             MainPanel mainPanel = new MainPanel();
-            ControlPanel ctrlPanel = new ControlPanel();
+            ControlPanel ctrlPanel = new ControlPanel(mainPanel);
             panel.add(ctrlPanel, BorderLayout.NORTH);
             panel.add(mainPanel, BorderLayout.CENTER);
             frame.add(panel);

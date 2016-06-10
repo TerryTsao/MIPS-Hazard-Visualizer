@@ -9,15 +9,11 @@ import java.nio.file.Paths;
 import java.io.*;
 import java.util.regex.*;
 
-
-
-
 public class FileReader
 {
    private static File asmFile;
    private static Path asmFilePath;
    private static Instruction lineOfCode;
-   private static InstructionList list = new InstructionList();
    private static Matcher match;
 
    private static String label = "";
@@ -26,7 +22,6 @@ public class FileReader
    private static String arg2 = "";
    private static String arg3 = "";
    private static String comment = "";
-
 
    public FileReader(){
 
@@ -52,9 +47,6 @@ public class FileReader
             BufferedReader reader =
                   new BufferedReader(new InputStreamReader(in))) {
          String line = new String();
-
-         //unused counter that keeps tracks of which line of code we're on. May be deleted.
-         int lineNumber = 1;
 
          String pattern = "(\\.\\w+)?(?:\\s*([\\w.]+)\\s*:)?[\\s,]*([\\w.]+)?[\\s,]*(\\$[\\w]+)?[\\s,]*([\\w\\s+\\-(]*[$]?[\\w)]+)?[\\s,]*(\\$*[\\w]+)?[\\s,]*(?:#(.*))?";
          //Regex101 version: (\.\w+)?(?:\s*([\w.]+)\s*:)?[\s,]*([\w.]+)?[\s,]*(\$[\w]+)?[\s,]*([\w\s+\-(]*[$]?[\w)]+)?[\s,]*(\$*[\w]+)?[\s,]*(?:#(.*))?
@@ -85,9 +77,8 @@ public class FileReader
                   createAndAddLineOfCode();
                }
             }
-            lineNumber++;
          }
-         list.printArrayList();
+         InstructionList.printArrayList();
 
       } catch (IOException x) {
          System.err.println(x);
@@ -104,7 +95,7 @@ public class FileReader
 
    private static void createAndAddLineOfCode() {
       lineOfCode = new Instruction(label, cmd, arg1, arg2, arg3, comment);
-      list.addInstruction(lineOfCode);
+      InstructionList.addInstruction(lineOfCode);
    }
 
    public static void setLookAndFeel() {
@@ -125,10 +116,5 @@ public class FileReader
       catch (IllegalAccessException e) {
          // handle exception
       }
-   }
-
-   public static void main(String [] args) {
-      FileReader.setLookAndFeel();
-      FileReader.openFileChooser();
    }
 }
