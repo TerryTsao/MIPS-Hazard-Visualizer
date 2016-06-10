@@ -16,7 +16,7 @@ public class Arrow extends JComponent {
    private int size;
    private double posX, posY, length;
 
-   private enum cycleType {EX, MEM};
+   protected enum cycleType {EX, MEM};
    /**
     * Constructor that sets arrow size.
     */
@@ -46,19 +46,23 @@ public class Arrow extends JComponent {
 
    //When a value needs to be forwarded from one command to another, an arrow will be drawn accordingly
    //TODO: Handle cases where arrow needs to differentiate between rs and rt registers.
+   //TODO: Find correct ratios to position arrow correctly....and remove hardcoded numbers.
    public boolean setArrowPosition(ProcessorDiagram pro1, ProcessorDiagram pro2, Arrow.cycleType type) {
       if(pro1 != pro2) {
          int levelDifference = pro2.getLevel() - pro1.getLevel();
          length = levelDifference * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO;
+         System.out.println("Length: " + length);
          //if(need to reach rt line of ALU) length += 24
-         posY =  pro1.getLevel() * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO ;
+         posY =  pro1.getLevel() * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO + 150 ;
+         System.out.println("PosY: " + posY);
          posX = pro1.getLevel() * ProcessorDiagram.INDENT * (int)ProcessorDiagram.SCALE_RATIO ;
+         System.out.println("PosX: " + posX + "\nType: " + type);
          switch (type){
          case EX: 
-            posX += 800 * ProcessorDiagram.SCALE_RATIO;
+            posX += (800 * ProcessorDiagram.SCALE_RATIO / 10) + 100;
             break;
          case MEM:
-            posX += 1100 * ProcessorDiagram.SCALE_RATIO;
+            posX += (1100 * ProcessorDiagram.SCALE_RATIO / 10) + 100;
             break;
          }
          return true;
