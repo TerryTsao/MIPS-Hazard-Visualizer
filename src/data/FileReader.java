@@ -34,7 +34,7 @@ public class FileReader
          //System.out.println("You chose to open this file: " +
          //chooser.getSelectedFile().getName() + "\n");
          asmFile = chooser.getSelectedFile();
-         asmFilePath = Paths.get( asmFile.getPath());
+         asmFilePath = Paths.get(asmFile.getPath());
          //System.out.println(asmFilePath);
          InstructionList.clearList();
          readFile();

@@ -37,7 +37,7 @@ public class Bubble extends JComponent {
       updateXPos(level);
       updateYPos(level); 
       try {
-         image = ImageIO.read(new File("resources/BubbleImage.gif"));
+         image = ImageIO.read(new File("resources/Bubble.png"));
       } catch (IOException ex) {}      
    }
 
