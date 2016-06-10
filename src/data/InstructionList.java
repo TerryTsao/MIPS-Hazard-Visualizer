@@ -23,6 +23,10 @@ public class InstructionList
       return list.size();
    }
 
+   public static void clearList() {
+      list.clear();
+   }
+
    public static int getProgramCounter() {
       return programCounter;
    }

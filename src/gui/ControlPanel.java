@@ -48,6 +48,8 @@ public class ControlPanel extends JPanel {
          @Override
          public void actionPerformed(ActionEvent e) {
             FileReader.openFileChooser();
+            mainPanel.getInstructionPanel().fetchInstructions();
+            mainPanel.repaint();
          }
       });
    }

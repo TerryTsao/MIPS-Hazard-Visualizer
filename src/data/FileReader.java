@@ -36,6 +36,7 @@ public class FileReader
          asmFile = chooser.getSelectedFile();
          asmFilePath = Paths.get( asmFile.getPath());
          //System.out.println(asmFilePath);
+         InstructionList.clearList();
          readFile();
       }
    }
