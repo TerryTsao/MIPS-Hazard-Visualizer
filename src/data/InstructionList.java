@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class InstructionList
 {
 
-   private ArrayList<Instruction> codeList;
+   private static ArrayList<Instruction> codeList;
    private int programCounter;
 
    public InstructionList() {
