@@ -58,6 +58,8 @@ public class PipelineDiagram extends JPanel {
       //should not set level to 5 because it's > NUM_OF_LINES
       bubbleTest.setLevel(5);
       bubbleTest.draw(g, this);
+      
+      
 
       System.out.println(getWidth() + " " + getHeight());
    }
