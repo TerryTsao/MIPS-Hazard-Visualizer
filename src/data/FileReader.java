@@ -1,13 +1,18 @@
 package data;
-import javax.swing.JFileChooser;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.*;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class FileReader
 {
@@ -92,5 +97,11 @@ public class FileReader
       catch (IllegalAccessException e) {
          // handle exception
       }
+   }
+
+   public static void openDefalutFile() {
+      asmFile = new File("resources/DataHazard_Sample_CS40A.asm");
+      asmFilePath = Paths.get(asmFile.getPath());
+      readFile();
    }
 }

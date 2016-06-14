@@ -11,7 +11,7 @@ import data.FileReader;
 
 public class Main {
    public static void main(String[] args) {
-      FileReader.openFileChooser();
+      FileReader.openDefalutFile();
       SwingUtilities.invokeLater(new Runnable() {
          @Override
          public void run() {
