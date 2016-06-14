@@ -53,7 +53,7 @@ public class PipelineDiagram extends JPanel {
       arrowTest.draw(g);
 
       
-      bubbleTest.setLevel(2);
+      bubbleTest.setLevel(0);
       bubbleTest.draw(g, this);
       
       

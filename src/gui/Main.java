@@ -11,6 +11,7 @@ import data.FileReader;
 
 public class Main {
    public static void main(String[] args) {
+      FileReader.setLookAndFeel();
       FileReader.openFileChooser();
       SwingUtilities.invokeLater(new Runnable() {
          @Override

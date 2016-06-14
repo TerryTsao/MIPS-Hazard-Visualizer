@@ -23,6 +23,13 @@ public class FileReader
          InstructionList.clearList();
          readFile();
       }
+      else {
+         System.out.println("OPENING DEFAULT FILE");
+         asmFile = new File("resources/default.asm");
+         asmFilePath = Paths.get(asmFile.getPath());
+         InstructionList.clearList();
+         readFile();
+      }
    }
 
    private static void readFile() {
