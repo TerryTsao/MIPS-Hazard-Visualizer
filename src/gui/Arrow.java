@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 
 import javax.swing.JComponent;
 
@@ -13,15 +12,20 @@ import javax.swing.JComponent;
  * 
  */
 public class Arrow extends JComponent {
-   private int size;
    private double posX, posY, length;
+   private final static int FIRST_LINE_Y_POS = 150;
+   private final static int FIRST_LINE_X_POS = 107;
+   private final static int ARROW_HEAD_LENGTH = 12;
+   private final static int EX_X_POS_ADJUSTMENT = 785;
+   private final static int MEM_X_POS_ADJUSTMENT = 1085;
+
 
    protected enum cycleType {EX, MEM};
    /**
     * Constructor that sets arrow size.
     */
    public Arrow() {
-      size = 4;
+
    }
 
    /**
@@ -30,7 +34,7 @@ public class Arrow extends JComponent {
     * @param g
     * @param ship
     */
-   void draw(Graphics g) {
+   public void draw(Graphics g) {
       Graphics2D g2d = (Graphics2D) g.create();
 
       // Draw vertical arrow
@@ -39,37 +43,67 @@ public class Arrow extends JComponent {
       g2d.drawLine((int)posX, (int)posY, (int)posX, (int)(posY + length));
       g2d.setStroke(new BasicStroke(0));
       g2d.fillPolygon(new int[] {(int)posX+5, (int)posX, (int)posX-5},
-            new int[] {(int)(posY + length), (int)(posY + length + 12), (int)(posY + length)}, 3);
-      
+            new int[] {(int)(posY + length), (int)(posY + length + ARROW_HEAD_LENGTH), 
+                  (int)(posY + length)}, 3);
+
    }
 
 
    //When a value needs to be forwarded from one command to another, an arrow will be drawn accordingly
-   //TODO: Handle cases where arrow needs to differentiate between rs and rt registers.
-   //TODO: Find correct ratios to position arrow correctly....and remove hardcoded numbers.
-   public boolean setArrowPosition(ProcessorDiagram pro1, ProcessorDiagram pro2, Arrow.cycleType type) {
-      if(pro1 != pro2) {
-         int levelDifference = pro2.getLevel() - pro1.getLevel();
-         length = levelDifference * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO;
-         System.out.println("Length: " + length);
-         //if(need to reach rt line of ALU) length += 24
-         posY =  pro1.getLevel() * ProcessorDiagram.Y_DISTANCE * (int)ProcessorDiagram.SCALE_RATIO + 150 ;
-         System.out.println("PosY: " + posY);
-         posX = pro1.getLevel() * ProcessorDiagram.INDENT * (int)ProcessorDiagram.SCALE_RATIO ;
-         System.out.println("PosX: " + posX + "\nType: " + type);
+   public boolean setArrowPosition(ProcessorDiagram pro1, ProcessorDiagram pro2, 
+         Arrow.cycleType type, String register) {
+      int levelDifference = pro2.getLevel() - pro1.getLevel();
+      if(pro1 != pro2 && levelDifference > 0 && levelDifference <= 2) {
+         length = calcLength(levelDifference);
+         posY =  calcPosY(pro1.getLevel());
+         posX = calcPosX(pro1.getLevel());
+
          switch (type){
          case EX: 
-            posX += (800 * ProcessorDiagram.SCALE_RATIO / 10) + 100;
+            posX += (EX_X_POS_ADJUSTMENT * ProcessorDiagram.SCALE_RATIO / 10);
+            //adjust length to reach rs or rt registers when needed
+            adjustLength(register);
             break;
          case MEM:
-            posX += (1100 * ProcessorDiagram.SCALE_RATIO / 10) + 100;
+            posX += (MEM_X_POS_ADJUSTMENT * ProcessorDiagram.SCALE_RATIO / 10);
+            //adjust length to reach rs or rt registers when needed
+            if(levelDifference == 2) {
+               adjustLength(register);
+            }
             break;
          }
+
          return true;
+      }
+      else {
+         posX = -1000; //Invalid input so set coordinate off screen
       }
       return false;
    }
 
+   private int calcLength(int levelDifference) {
+      return (levelDifference * ProcessorDiagram.Y_DISTANCE * 
+            (int)ProcessorDiagram.SCALE_RATIO) - ARROW_HEAD_LENGTH;
+   }
+
+   private double calcPosY(int pro1Level) {
+      return FIRST_LINE_Y_POS + (pro1Level * ProcessorDiagram.Y_DISTANCE * 
+            (int)ProcessorDiagram.SCALE_RATIO);
+   }
+
+   private double calcPosX(int pro1Level) {
+      return FIRST_LINE_X_POS + (pro1Level * ProcessorDiagram.INDENT * 
+            ProcessorDiagram.SCALE_RATIO);
+   }
+
+   private void adjustLength(String register) {
+      if(register.equals("RS") || register.equals("rs")) {
+         length -= (40 * ProcessorDiagram.SCALE_RATIO / 10);
+      }
+      else if(register.equals("RT") || register.equals("rt")){
+         length += (40 * ProcessorDiagram.SCALE_RATIO / 10);
+      }
+   }
 
    public boolean setPosX(double posX) {
       if(posX >= 0) {

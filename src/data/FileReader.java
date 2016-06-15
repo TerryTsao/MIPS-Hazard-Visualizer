@@ -24,7 +24,7 @@ public class FileReader
          readFile();
       }
       else {
-         System.out.println("OPENING DEFAULT FILE");
+         System.out.println("\nOPENING DEFAULT FILE\n");
          asmFile = new File("resources/default.asm");
          asmFilePath = Paths.get(asmFile.getPath());
          InstructionList.clearList();
