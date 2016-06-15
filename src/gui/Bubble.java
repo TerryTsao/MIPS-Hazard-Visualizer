@@ -22,11 +22,11 @@ public class Bubble extends JComponent {
    private final static int SPACING_BETWEEN_STAGES = 89;
    private final static int FIRST_LINE_X_POS = 285;
    private final static int FIRST_LINE_Y_POS = 124;
-   
+
    public Bubble() {
       this(0);
    }
-   
+
    public Bubble(int level) {
       this.level = level;
       updateXPos(level);
@@ -64,7 +64,7 @@ public class Bubble extends JComponent {
    private void updateXPos(int level) {
       posX = FIRST_LINE_X_POS + (ProcessorDiagram.SCALE_RATIO * ProcessorDiagram.INDENT * level);
    }
-   
+
    private void updateYPos(int level) {
       posY = FIRST_LINE_Y_POS + (ProcessorDiagram.SCALE_RATIO * ProcessorDiagram.Y_DISTANCE * level); 
    }

@@ -45,9 +45,7 @@ public class Arrow extends JComponent {
       g2d.fillPolygon(new int[] {(int)posX+5, (int)posX, (int)posX-5},
             new int[] {(int)(posY + length), (int)(posY + length + ARROW_HEAD_LENGTH), 
                   (int)(posY + length)}, 3);
-
    }
-
 
    //When a value needs to be forwarded from one command to another, an arrow will be drawn accordingly
    public boolean setArrowPosition(ProcessorDiagram pro1, ProcessorDiagram pro2, 
@@ -72,7 +70,6 @@ public class Arrow extends JComponent {
             }
             break;
          }
-
          return true;
       }
       else {

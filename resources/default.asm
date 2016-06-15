@@ -12,10 +12,10 @@ add $t6, $t1, $t2 # No forwarding
 
 lw $t3, 0($t1)
 add $t4, $t3, $t2 #Stall and forward
-sw $t4, 0($t2) #I dont think this needs forwarding
+sw $t4, 0($t2) #Need forwarding
 
 add $t6, $t3, $t2
-sw $t1, 0($t6) # Might need forwarding.
+sw $t1, 0($t6) # Need forwarding.
 
 
 .data

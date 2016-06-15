@@ -53,17 +53,17 @@ public class PipelineDiagram extends JPanel {
       pro3 = new ProcessorDiagram(3);
       pro4 = new ProcessorDiagram(4);
       
-//      arrowTest.setArrowPosition(pro0, pro1, Arrow.cycleType.MEM, "");
-//      arrowTest.draw(g);
-//      
-//      arrowTest.setArrowPosition(pro2, pro4, Arrow.cycleType.MEM, "RS");
-//      arrowTest.draw(g);
-//      
-//      arrowTest.setArrowPosition(pro0, pro1, Arrow.cycleType.EX, "RT");
-//      arrowTest.draw(g);
-//      
-//      arrowTest.setArrowPosition(pro1, pro3, Arrow.cycleType.MEM, "RT");
-//      arrowTest.draw(g);
+      arrowTest.setArrowPosition(pro0, pro1, Arrow.cycleType.MEM, "");
+      arrowTest.draw(g);
+      
+      arrowTest.setArrowPosition(pro2, pro4, Arrow.cycleType.MEM, "RS");
+      arrowTest.draw(g);
+      
+      arrowTest.setArrowPosition(pro0, pro1, Arrow.cycleType.EX, "RT");
+      arrowTest.draw(g);
+      
+      arrowTest.setArrowPosition(pro1, pro3, Arrow.cycleType.MEM, "RT");
+      arrowTest.draw(g);
 
 //      bubbleTest.setLevel(pro1.getLevel());
 //      bubbleTest.draw(g, this);
