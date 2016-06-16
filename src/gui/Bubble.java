@@ -22,11 +22,11 @@ public class Bubble extends JComponent {
    private final static int SPACING_BETWEEN_STAGES = 89;
    private final static int FIRST_LINE_X_POS = 285;
    private final static int FIRST_LINE_Y_POS = 124;
-   
+
    public Bubble() {
       this(0);
    }
-   
+
    public Bubble(int level) {
       this.level = level;
       updateXPos(level);
@@ -41,7 +41,7 @@ public class Bubble extends JComponent {
     * @param g
     * @param io
     */
-   void draw(Graphics g, ImageObserver io) {
+   public void draw(Graphics g, ImageObserver io) {
       Graphics2D g2d = (Graphics2D) g.create();
 
       //draw 3 bubble images at 3 pipeline stages.
@@ -50,22 +50,6 @@ public class Bubble extends JComponent {
       g2d.drawImage(image, (int)posX+(SPACING_BETWEEN_STAGES*2), (int)posY, RADIUS, RADIUS, io);
    }
 
-
-//   public boolean setPosX(double posX) {
-//      if(posX >= 0) {
-//         this.posX = posX;
-//         return true;
-//      }
-//      return false;
-//   }
-//
-//   public boolean setPosY(double posY) {
-//      if(posY >= 0) {
-//         this.posY = posY;
-//         return true;
-//      }
-//      return false;
-//   }
 
    public boolean setLevel(int level) {
       if(level >= 0 && level < PipelineDiagram.NUM_OF_LINES) {
@@ -80,7 +64,7 @@ public class Bubble extends JComponent {
    private void updateXPos(int level) {
       posX = FIRST_LINE_X_POS + (ProcessorDiagram.SCALE_RATIO * ProcessorDiagram.INDENT * level);
    }
-   
+
    private void updateYPos(int level) {
       posY = FIRST_LINE_Y_POS + (ProcessorDiagram.SCALE_RATIO * ProcessorDiagram.Y_DISTANCE * level); 
    }

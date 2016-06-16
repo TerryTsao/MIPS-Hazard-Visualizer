@@ -28,6 +28,14 @@ public class FileReader
          InstructionList.clearList();
          readFile();
       }
+      /*
+      else {
+         System.out.println("\nOPENING DEFAULT FILE\n");
+         asmFile = new File("resources/default.asm");
+         asmFilePath = Paths.get(asmFile.getPath());
+         InstructionList.clearList();
+         readFile();
+      }*/
    }
 
    private static void readFile() {
@@ -100,7 +108,7 @@ public class FileReader
    }
 
    public static void openDefalutFile() {
-      asmFile = new File("resources/DataHazard_Sample_CS40A.asm");
+      asmFile = new File("resources/default.asm");
       asmFilePath = Paths.get(asmFile.getPath());
       readFile();
    }
