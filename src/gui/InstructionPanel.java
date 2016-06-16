@@ -62,21 +62,34 @@ public class InstructionPanel extends JPanel {
    }
 
    private void printInstructions(Graphics2D g2d) {
+      int lineNum = InstructionList.getProgramCounter();
+
       for (int i = 0; i < NUM_OF_LINES; i++) {
+         int y =
+               (int)(ProcessorDiagram.ORIGIN.y + ProcessorDiagram.Y_DISTANCE
+                     * (i + 0.69) * ProcessorDiagram.SCALE_RATIO);
+
          String[] parts = {
                instructions[i].getCmd(),
                instructions[i].getArg1(),
                instructions[i].getArg2(),
                instructions[i].getArg3()
                };
-         drawParts(parts, i, g2d);
+         if (instructions[i].getInstruction().length() > 2) {
+            // line number
+            g2d.setColor(Color.gray);
+            Font temp = g2d.getFont();
+            g2d.setFont(new Font("helvetica", Font.ITALIC, 17));
+            g2d.drawString(String.format("%03d", lineNum++), 5, y);
+            g2d.setFont(temp);
+         }
+         drawParts(parts, y, g2d);
       }
    }
 
-   private void drawParts(String[] parts, int level, Graphics2D g2d) {
-      int y = (int)(ProcessorDiagram.ORIGIN.y + ProcessorDiagram.Y_DISTANCE
-            * (level + 0.69) * ProcessorDiagram.SCALE_RATIO);
+   private void drawParts(String[] parts, int y, Graphics2D g2d) {
       int x = 0;
+
       for (int i = 0; i < parts.length; i++) {
          if (parts[i] == null)
             continue;
