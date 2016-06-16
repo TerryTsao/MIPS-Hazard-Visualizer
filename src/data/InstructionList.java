@@ -45,4 +45,8 @@ public class InstructionList
       System.out.println("******** End of file ********");
 
    }
+
+   public static ArrayList<Instruction> getList() {
+      return list;
+   }
 }
