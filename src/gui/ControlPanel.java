@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import control.Controller;
 import data.FileReader;
 import data.InstructionList;
 
@@ -30,6 +31,7 @@ public class ControlPanel extends JPanel {
          @Override
          public void actionPerformed(ActionEvent e) {
             InstructionList.shiftProgramCounter(-1);
+            Controller.update(mainPanel.getPipelinePanel());
             mainPanel.getInstructionPanel().fetchInstructions();
             mainPanel.repaint();
          }
@@ -39,6 +41,7 @@ public class ControlPanel extends JPanel {
          @Override
          public void actionPerformed(ActionEvent e) {
             InstructionList.shiftProgramCounter(1);
+            Controller.update(mainPanel.getPipelinePanel());
             mainPanel.getInstructionPanel().fetchInstructions();
             mainPanel.repaint();
          }

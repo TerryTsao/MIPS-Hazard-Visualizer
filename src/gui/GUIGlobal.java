@@ -6,6 +6,8 @@ public class GUIGlobal {
    
    public static final int MIN_FRAME_WIDTH = 600;
    public static final int MIN_FRAME_HEIGHT = 375;
+   
+   public static final int NUM_OF_LINES = 5;
 
    public static final int INSTRUCTION_PANEL_REF_WIDTH = 327;
    public static final int INSTRUCTION_PANEL_REF_HEIGHT = 703;

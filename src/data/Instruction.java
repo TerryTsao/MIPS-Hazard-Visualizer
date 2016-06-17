@@ -1,6 +1,5 @@
 package data;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Instruction
@@ -67,6 +66,8 @@ public class Instruction
    }
 
    public String[] getInputReg() {
+      if (cmd == null)
+         return new String[0];
       String[] input;
       switch (cmd) {
       case "j":
@@ -80,7 +81,6 @@ public class Instruction
       case "bne":
       case "la":
       case "li":
-      case "sw":
          input = new String[1];
          input[0] = arg1;
          break;
@@ -88,6 +88,10 @@ public class Instruction
          input = new String[1];
          input[0] = Pattern.compile("\\((\\$\\w+)\\)").matcher(arg2).group();
          break;
+      case "sw":
+         input = new String[2];
+         input[0] = Pattern.compile("\\((\\$\\w+)\\)").matcher(arg2).group();
+         input[1] = arg1;
       default:
          input = new String[2];
          input[0] = arg2;
@@ -97,6 +101,8 @@ public class Instruction
    }
 
    public String getOutputReg() {
+      if (cmd == null)
+         return null;
       String output;
       switch (cmd) {
       case "beq":

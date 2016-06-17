@@ -27,6 +27,10 @@ public class InstructionList
       list.clear();
    }
 
+   public static int getSize() {
+      return list.size();
+   }
+
    public static int getProgramCounter() {
       return programCounter;
    }

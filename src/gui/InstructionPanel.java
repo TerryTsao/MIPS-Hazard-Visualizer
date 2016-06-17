@@ -13,9 +13,7 @@ import data.Instruction;
 import data.InstructionList;
 
 public class InstructionPanel extends JPanel {
-   public static final int NUM_OF_LINES = 5;
-
-   public static final int INDENT = 30;
+   public static final int INDENT = 33;
 
    private Instruction[] instructions;
 
@@ -23,14 +21,15 @@ public class InstructionPanel extends JPanel {
       setPreferredSize(
             new Dimension(GUIGlobal.PIPELINE_PANEL_REF_WIDTH / 3, 900));
 
-      instructions = new Instruction[NUM_OF_LINES];
+      instructions = new Instruction[GUIGlobal.NUM_OF_LINES];
       fetchInstructions();
    }
 
    public void fetchInstructions() {
-      for (int i = 0; i < NUM_OF_LINES; i++) {
-         instructions[i] = InstructionList.getList()
-               .get(InstructionList.getProgramCounter() + i);
+      for (int i = 0; i < GUIGlobal.NUM_OF_LINES; i++) {
+         int pc = InstructionList.getProgramCounter();
+         if (pc + i >= 0 && pc + i < InstructionList.getSize())
+            instructions[i] = InstructionList.getList().get(pc + i);
       }
    }
 
@@ -64,7 +63,7 @@ public class InstructionPanel extends JPanel {
    private void printInstructions(Graphics2D g2d) {
       int lineNum = InstructionList.getProgramCounter();
 
-      for (int i = 0; i < NUM_OF_LINES; i++) {
+      for (int i = 0; i < GUIGlobal.NUM_OF_LINES; i++) {
          int y =
                (int)(ProcessorDiagram.ORIGIN.y + ProcessorDiagram.Y_DISTANCE
                      * (i + 0.69) * ProcessorDiagram.SCALE_RATIO);
@@ -89,6 +88,7 @@ public class InstructionPanel extends JPanel {
 
    private void drawParts(String[] parts, int y, Graphics2D g2d) {
       int x = 0;
+      int pc = InstructionList.getProgramCounter();
 
       for (int i = 0; i < parts.length; i++) {
          if (parts[i] == null)
@@ -98,7 +98,8 @@ public class InstructionPanel extends JPanel {
             g2d.setColor(Color.black);
          else
             g2d.setColor(Color.red);
-         g2d.drawString(parts[i], x += INDENT * 2, y);
+         if (pc + i >= 0 && pc + i < InstructionList.getSize())
+            g2d.drawString(parts[i], x += INDENT * 2, y);
       }
    }
 }

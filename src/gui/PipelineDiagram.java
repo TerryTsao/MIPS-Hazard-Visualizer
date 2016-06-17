@@ -10,17 +10,41 @@ public class PipelineDiagram extends JPanel {
    public static final int NUM_OF_LINES = 5;
 
    private ProcessorDiagram[] processorDiagrams;
-   private Arrow arrowTest;
-   private Bubble bubbleTest;
+
+   static public Arrow arrowsArray[] = new Arrow[4];
+   static public Bubble bubblesArray[] = new Bubble[4];
+
+   private boolean arrowVis[] = {false, false, false, false};
+   private boolean bubbleVis[] = {false, false, false, false};
+
    //private Arrow [] arrowArray; //holds all arrows to be drawn.
 
+   static {
+      arrowsArray[0] = new Arrow();
+      arrowsArray[1] = new Arrow();
+      arrowsArray[2] = new Arrow();
+      arrowsArray[3] = new Arrow();
+      bubblesArray[0] = new Bubble();
+      bubblesArray[1] = new Bubble();
+      bubblesArray[2] = new Bubble();
+      bubblesArray[3] = new Bubble();
+   }
+   
+   
    public PipelineDiagram() {
       processorDiagrams = new ProcessorDiagram[NUM_OF_LINES];
       for (int i = 0; i < NUM_OF_LINES; i++)
          processorDiagrams[i] = new ProcessorDiagram(i);
-      
-      arrowTest = new Arrow();
-      bubbleTest = new Bubble();
+   }
+   
+   public void setArrowVis(int index, boolean flag) {
+      if (index >= 0 && index < 4)
+         arrowVis[index] = flag;
+   }
+
+   public void setBubbleVis(int index, boolean flag) {
+      if (index >= 0 && index < 4)
+         bubbleVis[index] = flag;
    }
 
    @Override
@@ -28,9 +52,9 @@ public class PipelineDiagram extends JPanel {
       super.paintComponent(g);
       Graphics2D g2d = (Graphics2D)g;
 
-      double xScale = getWidth() 
+      double xScale = getWidth()
             / (double)GUIGlobal.PIPELINE_PANEL_REF_WIDTH;
-      double yScale = getHeight() 
+      double yScale = getHeight()
             / (double)GUIGlobal.PIPELINE_PANEL_REF_HEIGHT;
       g2d.scale(xScale, yScale);
 
@@ -40,36 +64,30 @@ public class PipelineDiagram extends JPanel {
 
       for (ProcessorDiagram processor : processorDiagrams)
          processor.draw(g);
-      
-//      arrowTest.setPosX(432);
-//      arrowTest.setPosY(240);
-//      arrowTest.setLength(66);
-//      arrowTest.draw(g);
-      
+
       ProcessorDiagram pro0, pro1, pro2, pro3, pro4;
       pro0 = new ProcessorDiagram(0);
       pro1 = new ProcessorDiagram(1);
       pro2 = new ProcessorDiagram(2);
       pro3 = new ProcessorDiagram(3);
       pro4 = new ProcessorDiagram(4);
-      
-      arrowTest.setArrowPosition(pro0, pro1, Arrow.cycleType.MEM, "");
-      arrowTest.draw(g);
-      
-      arrowTest.setArrowPosition(pro2, pro4, Arrow.cycleType.MEM, "RS");
-      arrowTest.draw(g);
-      
-      arrowTest.setArrowPosition(pro0, pro1, Arrow.cycleType.EX, "RT");
-      arrowTest.draw(g);
-      
-      arrowTest.setArrowPosition(pro1, pro3, Arrow.cycleType.MEM, "RT");
-      arrowTest.draw(g);
 
-//      bubbleTest.setLevel(pro1.getLevel());
-//      bubbleTest.draw(g, this);
-      
-      
-      
+      arrowsArray[0].setArrowPosition(pro0, pro1, Arrow.cycleType.MEM, "", 0);
+      arrowsArray[1].setArrowPosition(pro0, pro2, Arrow.cycleType.MEM, "RS", 9);
+      arrowsArray[2].setArrowPosition(pro1, pro2, Arrow.cycleType.EX, "RT", 18);
+      arrowsArray[3].setArrowPosition(pro1, pro3, Arrow.cycleType.EX, "", 27);
+
+      bubblesArray[0].setLevel(pro0.getLevel());
+      bubblesArray[1].setLevel(pro1.getLevel());
+      bubblesArray[2].setLevel(pro2.getLevel());
+      bubblesArray[3].setLevel(pro3.getLevel());
+
+      for (int i = 0; i < 4; i++) {
+         if (arrowVis[i])
+            arrowsArray[i].draw(g);
+         if (bubbleVis[i])
+            bubblesArray[i].draw(g, this);
+      }
 
       System.out.println(getWidth() + " " + getHeight());
    }

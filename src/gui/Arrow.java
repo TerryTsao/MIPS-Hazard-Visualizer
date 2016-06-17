@@ -19,13 +19,14 @@ public class Arrow extends JComponent {
    private final static int EX_X_POS_ADJUSTMENT = 785;
    private final static int MEM_X_POS_ADJUSTMENT = 1085;
 
-
    protected enum cycleType {EX, MEM};
    /**
     * Constructor that sets arrow size.
     */
    public Arrow() {
-
+      posX = 0;
+      posY = 0;
+      length = 0;
    }
 
    /**
@@ -49,7 +50,7 @@ public class Arrow extends JComponent {
 
    //When a value needs to be forwarded from one command to another, an arrow will be drawn accordingly
    public boolean setArrowPosition(ProcessorDiagram pro1, ProcessorDiagram pro2, 
-         Arrow.cycleType type, String register) {
+         Arrow.cycleType type, String register, int offset) {
       int levelDifference = pro2.getLevel() - pro1.getLevel();
       if(pro1 != pro2 && levelDifference > 0 && levelDifference <= 2) {
          length = calcLength(levelDifference);
@@ -69,7 +70,10 @@ public class Arrow extends JComponent {
                adjustLength(register);
             }
             break;
+            
          }
+         posX += offset;
+
          return true;
       }
       else {
@@ -139,17 +143,3 @@ public class Arrow extends JComponent {
    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
