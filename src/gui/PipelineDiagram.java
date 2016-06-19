@@ -1,5 +1,7 @@
 package gui;
 
+import static gui.GUIGlobal.NUM_OF_LINES;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -7,8 +9,6 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 public class PipelineDiagram extends JPanel {
-   public static final int NUM_OF_LINES = 5;
-
    private ProcessorDiagram[] processorDiagrams;
 
    static public Arrow arrowsArray[] = new Arrow[4];

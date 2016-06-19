@@ -52,7 +52,7 @@ public class Bubble extends JComponent {
 
 
    public boolean setLevel(int level) {
-      if(level >= 0 && level < PipelineDiagram.NUM_OF_LINES) {
+      if (level >= 0 && level < GUIGlobal.NUM_OF_LINES) {
          this.level = level;
          updateXPos(level);
          updateYPos(level);

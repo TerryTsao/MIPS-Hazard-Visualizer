@@ -1,5 +1,7 @@
 package gui;
 
+import static gui.GUIGlobal.NUM_OF_LINES;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -63,7 +65,7 @@ public class ProcessorDiagram {
     *           the level to set
     */
    public void setLevel(int level) {
-      this.level = level >= 0 && level < PipelineDiagram.NUM_OF_LINES ? level : 0;
+      this.level = level >= 0 && level < NUM_OF_LINES ? level : 0;
    }
 
    public void draw(Graphics g) {
