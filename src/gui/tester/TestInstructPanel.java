@@ -1,3 +1,7 @@
+/**
+ * Tests class InstructionPanel.
+ */
+
 package gui.tester;
 
 import java.awt.BorderLayout;

@@ -1,3 +1,7 @@
+/**
+ * The control panel of the program.
+ */
+
 package gui;
 
 import java.awt.FlowLayout;
@@ -12,10 +16,25 @@ import data.FileReader;
 import data.InstructionList;
 
 public class ControlPanel extends JPanel {
+   /**
+    * Previous and next button.
+    */
    private JButton prev, next;
+   /**
+    * Switch view between diagram and schematic.
+    */
    private JButton switchView;
+   /**
+    * Load file button.
+    */
    private JButton loadFile;
 
+   /**
+    * Initialize members and link with main panel.
+    * 
+    * @param mainPanel
+    *           The main panel to link to.
+    */
    public ControlPanel(MainPanel mainPanel) {
       setLayout(new FlowLayout(FlowLayout.RIGHT));
       prev = new JButton("prev");

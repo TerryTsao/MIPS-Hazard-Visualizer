@@ -1,3 +1,7 @@
+/**
+ * The instructional panel that shows the currently shown instructions.
+ */
+
 package gui;
 
 import java.awt.Color;
@@ -13,10 +17,19 @@ import data.Instruction;
 import data.InstructionList;
 
 public class InstructionPanel extends JPanel {
+   /**
+    * The indent before every instructions.
+    */
    public static final int INDENT = 33;
 
+   /**
+    * The instructions currently shown.
+    */
    private Instruction[] instructions;
 
+   /**
+    * Sets panel size and instantiate members.
+    */
    public InstructionPanel() {
       setPreferredSize(
             new Dimension(GUIGlobal.PIPELINE_PANEL_REF_WIDTH / 3, 900));
@@ -25,6 +38,9 @@ public class InstructionPanel extends JPanel {
       fetchInstructions();
    }
 
+   /**
+    * Fetch NUM_OF_LINES instructions according to program counter.
+    */
    public void fetchInstructions() {
       for (int i = 0; i < GUIGlobal.NUM_OF_LINES; i++) {
          int pc = InstructionList.getProgramCounter();
@@ -60,6 +76,12 @@ public class InstructionPanel extends JPanel {
       printInstructions(g2d);
    }
 
+   /**
+    * Prints instructions on the panel.
+    * 
+    * @param g2d
+    *           The Graphics2D object.
+    */
    private void printInstructions(Graphics2D g2d) {
       int lineNum = InstructionList.getProgramCounter();
 
@@ -86,6 +108,17 @@ public class InstructionPanel extends JPanel {
       }
    }
 
+   /**
+    * Draws every parts of an instruction to constitute the entire instruction.
+    * 
+    * @param parts
+    *           Every parts of the instruction in String, that is cmd, arg1,
+    *           arg2, arg3.
+    * @param y
+    *           The y coordinate to draw on.
+    * @param g2d
+    *           The Graphics2D object.
+    */
    private void drawParts(String[] parts, int y, Graphics2D g2d) {
       int x = 0;
       int pc = InstructionList.getProgramCounter();

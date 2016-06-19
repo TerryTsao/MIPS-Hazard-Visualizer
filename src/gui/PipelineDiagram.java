@@ -1,3 +1,7 @@
+/**
+ * The pipeline diagram.
+ */
+
 package gui;
 
 import static gui.GUIGlobal.NUM_OF_LINES;
@@ -9,6 +13,9 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 public class PipelineDiagram extends JPanel {
+   /**
+    * An array of processor diagrams.
+    */
    private ProcessorDiagram[] processorDiagrams;
 
    static public Arrow arrowsArray[] = new Arrow[4];

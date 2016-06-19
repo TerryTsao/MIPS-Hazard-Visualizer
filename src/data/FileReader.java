@@ -1,3 +1,7 @@
+/**
+ * Reads asm files.
+ */
+
 package data;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,9 +20,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class FileReader
 {
+   /**
+    * File object for the asm file.
+    */
    private static File asmFile;
+   /**
+    * Path object for the asm file path.
+    */
    private static Path asmFilePath;
 
+   /**
+    * Open file chooser object to choose file and load it.
+    */
    public static void openFileChooser() {
       JFileChooser chooser = new JFileChooser();
       int returnVal = chooser.showOpenDialog(null);
@@ -38,6 +51,10 @@ public class FileReader
       }*/
    }
 
+   /**
+    * Read asm file and parse the instructions with regex. Store them in a list
+    * of Instructions objects.
+    */
    private static void readFile() {
       Path file = asmFilePath;
 
@@ -82,11 +99,30 @@ public class FileReader
       return asmFilePath;
    }
 
+   /**
+    * Adds a line in the asm file to InstructionList.
+    * 
+    * @param label
+    *           The label.
+    * @param cmd
+    *           The command.
+    * @param arg1
+    *           The first argument.
+    * @param arg2
+    *           The second argument.
+    * @param arg3
+    *           The third argument.
+    * @param comment
+    *           The comment.
+    */
    private static void addLine(String label, String cmd,
          String arg1, String arg2, String arg3, String comment) {
       InstructionList.addInstruction(new Instruction(label, cmd, arg1, arg2, arg3, comment));
    }
 
+   /**
+    * Set look and feel for GUI.
+    */
    public static void setLookAndFeel() {
       try {
          // Set cross-platform Java L&F (also called "Metal")
@@ -107,6 +143,9 @@ public class FileReader
       }
    }
 
+   /**
+    * Opens a default asm file and reads it.
+    */
    public static void openDefalutFile() {
       asmFile = new File("resources/default.asm");
       asmFilePath = Paths.get(asmFile.getPath());

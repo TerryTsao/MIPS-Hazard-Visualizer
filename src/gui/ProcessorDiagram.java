@@ -1,3 +1,7 @@
+/**
+ * The processor in the pipeline diagram.
+ */
+
 package gui;
 
 import static gui.GUIGlobal.NUM_OF_LINES;
@@ -14,18 +18,39 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ProcessorDiagram {
+   /**
+    * The image of processor diagram.
+    */
    private BufferedImage processorImage;
 
+   /**
+    * The indent on each level.
+    */
    public static final int INDENT = 30;
 
+   /**
+    * The y distance between each level.
+    */
    public static final int Y_DISTANCE = 30;
 
+   /**
+    * The origin to draw on level 0.
+    */
    public static final Point ORIGIN = new Point(100, 100);
 
+   /**
+    * The scale ratio to draw on initial screen size.
+    */
    public static final double SCALE_RATIO = 3.0;
 
+   /**
+    * The level of this processor diagram.
+    */
    private int level;
 
+   /**
+    * Load the image and set level to 0.
+    */
    public ProcessorDiagram() {
       try {
          processorImage = ImageIO.read(new File("resources/Pipeline.png"));
@@ -33,6 +58,12 @@ public class ProcessorDiagram {
       level = 0;
    }
 
+   /**
+    * Load the image and set the level.
+    * 
+    * @param level
+    *           The level of this diagram.
+    */
    public ProcessorDiagram(int level) {
       this();
       setLevel(level);
