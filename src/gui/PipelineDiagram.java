@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -64,6 +66,14 @@ public class PipelineDiagram extends JPanel {
 
       for (ProcessorDiagram processor : processorDiagrams)
          processor.draw(g);
+      
+      Color rectColor = new Color (255, 0, 0, 50);
+      Color borderColor = new Color (255, 30, 30, 180);
+      g.setColor(rectColor);
+      g.fillRect(455, 117, 70, 426);
+      g2d.setStroke(new BasicStroke(3));
+      g2d.setColor(borderColor);
+      g2d.drawRect(455, 117, 70, 426);
 
       ProcessorDiagram pro0, pro1, pro2, pro3, pro4;
       pro0 = new ProcessorDiagram(0);
