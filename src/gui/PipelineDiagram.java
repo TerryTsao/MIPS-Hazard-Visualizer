@@ -67,8 +67,9 @@ public class PipelineDiagram extends JPanel {
       for (ProcessorDiagram processor : processorDiagrams)
          processor.draw(g);
       
-      Color rectColor = new Color (255, 0, 0, 50);
-      Color borderColor = new Color (255, 30, 30, 180);
+      //draw static rectangle, showing current time
+      Color rectColor = new Color (100, 200, 255, 50);
+      Color borderColor = new Color (30, 30, 255, 130);
       g.setColor(rectColor);
       g.fillRect(455, 117, 70, 426);
       g2d.setStroke(new BasicStroke(3));
