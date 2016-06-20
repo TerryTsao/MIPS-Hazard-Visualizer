@@ -57,18 +57,13 @@ While following the agile process of software development, team has decided to t
 Users will be prompted to choose an .asm MIPS assembly file. Then, the instructions will be visually represented by a pipeline diagram. On the diagram, arrows and clouds will be shown to denote forwarding and bubbles, respectively. Users will be able to step through the instructions, observing data hazard mitigation appearing in the pipeline.
 
 ###### *UML Diagram*
-![UML Diagram](resources/UML Diagram.png)
+![UML Diagram](resources/UML Class Diagram.png)
 
 ## 2.0 Team and Constraints
 
 #### 2.1 Team Profile
 ***Josh***
  * Algorithms
-
-***Swati***
- * Java Swing UI
- * CS 1A, 1B
- * Familiarity of database management systems
 
 ***Xiaoxiang***
  * CS 10
