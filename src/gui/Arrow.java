@@ -179,7 +179,7 @@ public class Arrow extends JComponent {
     * 
     * @param posX
     *           x position.
-    * @return true if posX >= 0, false otherwise.
+    * @return true if posX greater than 0, false otherwise.
     */
    public boolean setPosX(double posX) {
       if(posX >= 0) {
@@ -194,7 +194,7 @@ public class Arrow extends JComponent {
     * 
     * @param posY
     *           y position.
-    * @return true if posY >= 0, false otherwise.
+    * @return true if posY greater than 0, false otherwise.
     */
    public boolean setPosY(double posY) {
       if(posY >= 0) {
@@ -209,7 +209,7 @@ public class Arrow extends JComponent {
     * 
     * @param length
     *           length of arrow.
-    * @return true if length >= 0, false otherwise.
+    * @return true if length greater than 0, false otherwise.
     */
    public boolean setLength(double length) {
       if(length >= 0) {
