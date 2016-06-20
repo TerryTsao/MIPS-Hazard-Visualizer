@@ -54,7 +54,7 @@ While following the agile process of software development, team has decided to t
 * Step-by-step walkthrough of MIPS assembly instructions. 
 
 ##### *Design and Implementation:*
-Users will be prompted to choose an .asm MIPS assembly file. Then, the instructions will be visually represented by a pipeline diagram. On the diagram, arrows and clouds will be shown to denote forwarding and bubbles, respectively. Users will be able to step through the instructions, observing data hazard mitigation appearing in the pipeline.
+Users will be prompted to choose an .asm MIPS assembly file. Then, the instructions will be visually represented by a pipeline diagram. On the diagram, arrows and "no entry" signs will be shown to denote forwarding and bubbles, respectively. Users will be able to step through the instructions, observing data hazard mitigation appearing in the pipeline.
 
 ###### *UML Diagram*
 ![UML Diagram](resources/UML Class Diagram.png)
@@ -76,6 +76,8 @@ Users will be prompted to choose an .asm MIPS assembly file. Then, the instructi
  * CS 1A, 1B
 
 #### 2.2 Challenges
+* Stepping through instructions while keeping the arrows and bubbles in the right place was difficult.
+* Designing a program that is easy to understand.
 
 #### 2.3 Assumptions and Constraints
 
