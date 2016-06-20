@@ -1,11 +1,21 @@
+/**
+ * Stores an instruction from asm files.
+ */
+
 package data;
 
 import java.util.regex.Pattern;
 
 public class Instruction
 {
+   /**
+    * Each part of an instruction. Could be null.
+    */
    private String label, cmd, arg1, arg2, arg3, comment;
 
+   /**
+    * Sets every member as empty String.
+    */
    public Instruction() {
       this.label = "";
       this.cmd = "";
@@ -15,6 +25,22 @@ public class Instruction
       this.comment = "";
    }
 
+   /**
+    * Sets member according to parameter.
+    * 
+    * @param label
+    *           The label.
+    * @param cmd
+    *           The command.
+    * @param arg1
+    *           The first argument.
+    * @param arg2
+    *           The second argument.
+    * @param arg3
+    *           The third argument.
+    * @param comment
+    *           The comment.
+    */
    public Instruction(String label, String cmd, String arg1, String arg2, String arg3, 
          String comment) {
       this.label = label;
@@ -49,6 +75,11 @@ public class Instruction
       return comment;
    }
 
+   /**
+    * Returns the instruction as a String, without label or comment.
+    * 
+    * @return The instruction without label or comment.
+    */
    public String getInstruction() {
       return (cmd != null ? cmd + " " : "")
             + (arg1 != null ? arg1 + " " : "")
@@ -56,6 +87,11 @@ public class Instruction
             + (arg3 != null ? arg3 + " " : "");
    }
 
+   /**
+    * Returns the full instruction as a String, with label and comment.
+    * 
+    * @return The full instruction with label and comment.
+    */
    public String getFullInstruction() {
       return (label != null ? label + ": ": "")
             + (cmd != null ? cmd + " " : "")
@@ -65,6 +101,11 @@ public class Instruction
             + (comment != null ? "#" + comment : "");
    }
 
+   /**
+    * Returns the input register.
+    * 
+    * @return The input register.
+    */
    public String[] getInputReg() {
       if (cmd == null)
          return new String[0];
@@ -100,6 +141,11 @@ public class Instruction
       return input;
    }
 
+   /**
+    * Returns the output register.
+    * 
+    * @return The output register, null if doesn't exist.
+    */
    public String getOutputReg() {
       if (cmd == null)
          return null;

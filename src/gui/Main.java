@@ -1,3 +1,9 @@
+/**
+ * The main of the program. 
+ * 
+ * @author joshuaptfan, orrblue, TerryTsao
+ */
+
 package gui;
 
 import java.awt.BorderLayout;

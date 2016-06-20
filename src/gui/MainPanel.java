@@ -1,3 +1,8 @@
+/**
+ * The main panel of the program.
+ * It includes the instruction panel and the pipeline diagram panel.
+ */
+
 package gui;
 
 import java.awt.BorderLayout;
@@ -7,9 +12,18 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class MainPanel extends JPanel {
+   /**
+    * The instruction panel object.
+    */
    private InstructionPanel instructionPanel;
+   /**
+    * The pipeline diagram object.
+    */
    private PipelineDiagram pipelinePanel;
 
+   /**
+    * Default constructor.
+    */
    public MainPanel() {
       setLayout(new BorderLayout());
       instructionPanel = new InstructionPanel();

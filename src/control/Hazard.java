@@ -1,3 +1,7 @@
+/**
+ * The hazard detection unit.
+ */
+
 package control;
 
 import data.Instruction;
@@ -5,9 +9,12 @@ import data.Instruction;
 public class Hazard {
    /**
     * Detects the need for forwarding/bypassing.
+    * 
     * @param iFirst
+    *           The first instruction.
     * @param iSecond
-    * @return
+    *           The second instruction.
+    * @return null if no bypass needed; RS or RT when bypass is necessary.
     */
    public static String detectBypass(Instruction iFirst, Instruction iSecond) {
       if (iFirst == null || iSecond == null)
@@ -27,8 +34,11 @@ public class Hazard {
 
    /**
     * Detects the need for a stall.
+    * 
     * @param i
-    * @return
+    *           The instruction to detect.
+    * @return 0 if no need to stall; 1 if it's load-use hazard; 2 if it's branch
+    *         hazard.
     */
    public static int detectStall(Instruction i) {
       if (i == null || i.getCmd() == null)
